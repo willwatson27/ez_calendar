@@ -27,7 +27,7 @@ defmodule EZCalendar.MonthCalendar do
     } 
   end
 
-  def title {year, month, day} do
+  defp title {year, month, day} do
     month = month_name({year, month, day})
     "#{month} #{year}"
   end

@@ -37,7 +37,9 @@ defmodule EZCalendar.Mixfile do
   #
   # Type "mix help deps" for more examples and options
   defp deps do
-    [{:phoenix_html, "~> 2.7"},
+    [{:ex_doc, ">= 0.0.0", only: :dev},
+    
+     {:phoenix_html, "~> 2.7"},
      {:plug, "~> 1.0"},
      {:ecto, "~> 2.0"},
      {:calendar, "~> 0.16.1"}]

@@ -33,7 +33,7 @@ defmodule EZCalendar.WeekCalendar do
     }
   end
 
-  def title date do
+  defp title date do
     {start_date, end_date} = week_range(date)
     start_date = start_date |> to_erl |> Calendar.Date.from_erl! |> Calendar.Strftime.strftime!("%d %b %Y")
     end_date = end_date |> to_erl |> Calendar.Date.from_erl! |> Calendar.Strftime.strftime!("%d %b %Y" ) 

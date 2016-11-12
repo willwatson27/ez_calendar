@@ -4,7 +4,7 @@ Turns Ecto queries into calendar data structures. Includes view helpers for serv
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed as:
+The package is [available in Hex](https://hex.pm/packages/ez_calendar), the package can be installed as:
 
 Add `ez_calendar` to your list of dependencies in `mix.exs`:
 ```elixir
