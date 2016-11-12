@@ -8,7 +8,7 @@ defmodule EZCalendar.HTML.WeekCalendar do
         [
           content_tag(:tr, build_weekdays), 
           build_days(calendar.dates, func, __MODULE__)
-        ], class: "calendar"
+        ], class: "ez-calendar"
       )
     ]
   end

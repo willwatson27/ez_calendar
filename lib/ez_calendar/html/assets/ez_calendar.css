@@ -1,4 +1,8 @@
-table {
+.calendar-next{}
+
+.calendar-prev{}
+
+table.ez-calendar {
   -webkit-border-horizontal-spacing: 0px;
   -webkit-border-vertical-spacing: 0px;
   background-color: rgba(0, 0, 0, 0);
@@ -9,11 +13,11 @@ table {
   width: 100%;
 }
 
-tr {
+.ez-calendar tr {
   border-collapse: collapse;
 }
 
-th {
+.ez-calendar th {
   padding: 6px;
   border-bottom: 2px solid rgb(221, 221, 221);
   border-collapse: collapse;
@@ -24,7 +28,7 @@ th {
   text-align: left;
 }
 
-td {
+.ez-calendar td {
   padding: 6px;
   vertical-align: top;
   width: 14%;
@@ -44,22 +48,23 @@ td {
   border-left-width: 1px;
 }
 
-.day {
+.ez-calendar .day {
   height: 120px;
 }
 
-.wday-0 {}
-.wday-1 {}
-.wday-2 {}
-.wday-3 {}
-.wday-4 {}
-.wday-5 {}
-.wday-6 {}
+.ez-calendar .sunday     {}
+.ez-calendar .monday     {}
+.ez-calendar .tuesday    {}
+.ez-calendar .wednesday  {}
+.ez-calendar .thursday   {}
+.ez-calendar .friday     {}
+.ez-calendar .saturday   {}
 
-.today {
+.ez-calendar .today {
   background: #FFFFC0
 }
 
-.trailing {
+.ez-calendar .trailing {
   opacity: 0.5;
 }
+

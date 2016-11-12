@@ -8,7 +8,7 @@ defmodule EZCalendar.HTML.MonthCalendar do
         [
           content_tag(:tr, build_weekdays), 
           build_weeks(calendar.dates, func)
-        ], class: "calendar"
+        ], class: "ez-calendar"
       )
     ]
   end
@@ -18,7 +18,9 @@ defmodule EZCalendar.HTML.MonthCalendar do
   end
 
   def day_class date do
-    class = ["day"]
+    weekday = date.weekday |> String.downcase
+
+    class = ["day #{weekday}"]
     class = if date.trailing?, do: ["trailing" | class], else: class 
     class = if date.today?, do: ["today" | class], else: class 
     class |> Enum.join(" ")

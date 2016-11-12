@@ -65,7 +65,7 @@ end
 
 Import view helpers
 ```elixir
-defmodule MyApp.EmployeeView do
+defmodule MyApp.ShiftView do
   use MyApp.Web, :view
   import EZCalendar.HTML
 end
@@ -91,12 +91,9 @@ Like the repo functions, there are render functions for each of the built in cal
 <% end %>
 ```
 
-The next and previous functions accept the calendar and a string showing how to format the path. The correct parameters will replace ":day", ":month" and ":year".
-
-They accept a function or string as an optional third argument
+The next and previous functions accept the calendar and a string showing how to format the path. The correct parameters will replace ":day", ":month" and ":year". They will also accept a function or string as an optional third argument
 ```elixir
 <%= calendar_next @calendar, "/shifts/:year/:month", fn()-> %>
-  ...
 <% end %>
 ```
 
