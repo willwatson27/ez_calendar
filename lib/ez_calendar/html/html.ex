@@ -9,21 +9,14 @@ defmodule EZCalendar.HTML do
 
   alias EZCalendar.HTML.{Month, Week, Day}
 
-  def calendar type, conn, struct, func do
+  def calendar(type,conn, struct, func) do
     type.build(conn, struct, func)
   end
 
-  def month_calendar conn, struct, func do
-    calendar(Month, conn, struct, func)
-  end
+  def month_calendar(conn, struct, func), do: calendar(Month, conn, struct, func)
+  def week_calendar(conn, struct, func), do: calendar(Week, conn, struct, func)
+  def day_calendar(conn, struct, func), do: calendar(Day, conn, struct, func)
 
-  def week_calendar conn, struct, func do
-    calendar(Week, conn, struct, func)
-  end
-
-  def day_calendar conn, struct, func do
-    calendar(Day, conn, struct, func)
-  end
 
   def build_weekdays do
     ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"] 

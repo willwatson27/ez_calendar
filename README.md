@@ -4,9 +4,8 @@ Turns Ecto queries into calendar data structures. Includes view helpers for serv
 
 ## Installation
 
-This package is [available in Hex](https://hex.pm/packages/ez_calendar) and can be installed as:
-
-Add `ez_calendar` to your list of dependencies in `mix.exs`:
+This package is [available in Hex](https://hex.pm/packages/ez_calendar)
+Add `ez_calendar` to your `mix.exs` file
 ```elixir
 def deps do
   [{:ez_calendar, "~> 0.1.0"}]
@@ -79,6 +78,8 @@ Like the repo functions, there are render functions for each of the built in cal
 <%= calendar MyApp.PayrollCalendar.HTML, @conn, @calendar, fn(date)-> %>
 <% end %>
 ```
+To install the stylesheets make sure you are in the root directory of your phoenix application and run:
+`mix ez_calendar.css`
 
 ## Configuration
 ```elixir
