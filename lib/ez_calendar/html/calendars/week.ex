@@ -1,10 +1,9 @@
-defmodule EZCalendar.HTML.Week do
+defmodule EZCalendar.HTML.WeekCalendar do
   use Phoenix.HTML
-  import EZCalendar.HTML, only: [build_days: 3, build_weekdays: 0]
+  import EZCalendar.HTML.CalendarUtil, only: [build_days: 3, build_weekdays: 0]
 
-  def build conn, calendar, func do
+  def build calendar, func do
     [
-      content_tag(:div, calendar.title, class: "title"),
       content_tag(:table, 
         [
           content_tag(:tr, build_weekdays), 

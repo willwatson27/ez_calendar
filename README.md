@@ -49,6 +49,12 @@ Repo.calendar(query, MyApp.PayrollCalendar, params, opts)
 
 ## Phoenix
 
+Install the stylesheets.
+
+```
+mix ez_calendar.css
+```
+
 Build a calendar from the params
 ```elixir
 def index(conn, params) do
@@ -65,21 +71,34 @@ defmodule MyApp.EmployeeView do
 end
 ```
 
-Generate the calendar using the view helpers
+Build a calendar using the view helpers
 ```elixir
-<%= month_calendar @conn, @calendar, fn(date)-> %>
+<%= @calendar.title %>
+
+<%= month_calendar @calendar, fn(date)-> %>
   <%= for shift <- date.data do %>
     ...
   <% end %>
 <% end %>
+
+<%= calendar_prev @calendar, "/shifts/:year/:month" %>
+<%= calendar_next @calendar, "/shifts/:year/:month" %>
+
 ```
-Like the repo functions, there are render functions for each of the built in calendars. You can also use the `calendar/4` function to pass in the HTML module as an arugument
+Like the repo functions, there are render functions for each of the built in calendars. You can also use the `calendar/3` function to pass in the HTML module as an arugument
 ```elixir
-<%= calendar MyApp.PayrollCalendar.HTML, @conn, @calendar, fn(date)-> %>
+<%= calendar MyApp.PayrollCalendar.HTML, @calendar, fn(date)-> %>
 <% end %>
 ```
-To install the stylesheets make sure you are in the root directory of your phoenix application and run:
-`mix ez_calendar.css`
+
+The next and previous functions accept the calendar and a string showing how to format the path. The correct parameters will replace ":day", ":month" and ":year".
+
+They accept a function or string as an optional third argument
+```elixir
+<%= calendar_next @calendar, "/shifts/:year/:month", fn()-> %>
+  ...
+<% end %>
+```
 
 ## Configuration
 ```elixir

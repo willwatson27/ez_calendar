@@ -54,7 +54,7 @@ defmodule EZCalendar do
 
   def map_from_date(date) do
     {y, m, d} = Calendar.Date.to_erl(date)
-    %{day: d, month: m, year: y}
+    %{year: y, month: m, day: d}
   end
 
   def month_name(date) do
