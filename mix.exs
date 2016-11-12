@@ -3,7 +3,7 @@ defmodule EZCalendar.Mixfile do
 
   def project do
     [app: :ez_calendar,
-     version: "0.1.0",
+     version: "0.1.1",
      elixir: "~> 1.3",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
@@ -40,7 +40,6 @@ defmodule EZCalendar.Mixfile do
     [{:ex_doc, ">= 0.0.0", only: :dev},
     
      {:phoenix_html, "~> 2.7"},
-     {:plug, "~> 1.0"},
      {:ecto, "~> 2.0"},
      {:calendar, "~> 0.16.1"}]
   end
