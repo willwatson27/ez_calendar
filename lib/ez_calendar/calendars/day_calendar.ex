@@ -5,7 +5,7 @@ defmodule EZCalendar.DayCalendar do
   import EZCalendar, only: [map_from_date: 1]
 
   alias EZCalendar.DayCalendar
-  defstruct [:date, :data, :day, :month, :month_name, :year, :today?, :weekday, :next, :prev, :params]
+  defstruct [:title, :date, :next, :prev, :params, :weekday]
 
   def date_range(date) do
     date = date |> to_erl
@@ -18,13 +18,22 @@ defmodule EZCalendar.DayCalendar do
 
   def build(dates, _date) do
     info = Enum.at(dates, 1)
+    date = {info.year, info.month, info.day}
     %DayCalendar{
-      month_name: info.date |> Calendar.Strftime.strftime!("%B"),
-      next: info.date |> add!(1) |> map_from_date,
-      prev: info.date |> subtract!(1) |> map_from_date,
-      params: %{day: info.day, month: info.month, year: info.year},
+      date: info,
+      title: date |> title,
+      weekday: info.weekday,
+      next: date |> add!(1) |> map_from_date,
+      prev: date |> subtract!(1) |> map_from_date,
+      params: date |> map_from_date,
     }
     |> struct(info)
+  end
+
+  defp title date do
+    {y, _, d} = date
+    month = date |> Calendar.Strftime.strftime!("%B")
+    "#{month} #{d}, #{y}"
   end
 
 

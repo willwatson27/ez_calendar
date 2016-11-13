@@ -52,6 +52,14 @@ table.ez-calendar {
   height: 120px;
 }
 
+.ez-calendar .day .date {
+  color: grey;
+}
+
+.ez-calendar .weekday {
+  text-align: center;
+}
+
 .ez-calendar .sunday     {}
 .ez-calendar .monday     {}
 .ez-calendar .tuesday    {}
