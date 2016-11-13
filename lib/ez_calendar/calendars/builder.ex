@@ -9,7 +9,7 @@ defmodule EZCalendar.Builder do
 
   defp query_results query, repo, start_date, end_date, opts do
     attr = opts[:field] || Application.get_env(:ez_calendar, :default_field, :date)
-
+    
     from( q in query, where:  field(q, ^attr) > ^start_date and field(q, ^attr) < ^end_date)
     |> repo.all   
   end
