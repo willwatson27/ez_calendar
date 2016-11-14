@@ -72,27 +72,26 @@ end
 ```
 
 Build a calendar using the view helpers
-```elixir
+```eex
+<%= calendar_prev @calendar, "/shifts/:year/:month", "<" %>
 <%= @calendar.title %>
+<%= calendar_next @calendar, "/shifts/:year/:month", ">" %>
 
 <%= month_calendar @calendar, fn(date)-> %>
+  <!-- calendar date -->
   <%= for shift <- date.data do %>
-    ...
-  <% end %>
-<% end %>
-
-<%= calendar_prev @calendar, "/shifts/:year/:month" %>
-<%= calendar_next @calendar, "/shifts/:year/:month" %>
-
+    <!-- query results for date -->
+  <% end %> 
+<% end %> 
 ```
 Like the repo functions, there are render functions for each of the built in calendars. You can also use the `calendar/3` function to pass in the HTML module as an arugument
-```elixir
+```eex
 <%= calendar MyApp.PayrollCalendar.HTML, @calendar, fn(date)-> %>
 <% end %>
 ```
 
 The next and previous functions accept the calendar and a string showing how to format the path. The correct parameters will replace ":day", ":month" and ":year". They will also accept a function or string as an optional third argument
-```elixir
+```eex
 <%= calendar_next @calendar, "/shifts/:year/:month", fn()-> %>
 <% end %>
 ```
@@ -102,8 +101,8 @@ The next and previous functions accept the calendar and a string showing how to 
 config :ez_calendar, 
   default_tz: "UTC",      # default / TZ data format / used to add "today" flag
   default_field: :date,   # default / date type / schema accessor for building calendar structs
-  default_next: "Next",   # default text for navigation links
-  default_prev: "Prev",   
+  default_next: "<",   # default text for navigation links
+  default_prev: ">",   
 ```
 The field and timezone can also be changed on a per query basis
 ```elixir

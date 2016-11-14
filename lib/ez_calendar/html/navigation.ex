@@ -4,14 +4,14 @@ defmodule EZCalendar.HTML.Navigation do
   import String, only: [replace: 3]
 
   def calendar_next(calendar, path, content \\ nil) do 
-    content = content || Application.get_env(:ez_calendar, :default_next, "Next")
+    content = content || Application.get_env(:ez_calendar, :default_next, ">")
 
     build_path(path, calendar.next)
     |> build_link(content, "calendar-next")
   end
 
   def calendar_prev(calendar, path, content \\ nil) do
-    content = content || Application.get_env(:ez_calendar, :default_prev, "Prev")
+    content = content || Application.get_env(:ez_calendar, :default_prev, "<")
 
     build_path(path, calendar.prev)
     |> build_link(content, "calendar-prev")
