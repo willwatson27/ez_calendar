@@ -16,33 +16,33 @@ defmodule EZCalendar.WeekCalendarTest do
   end
 
   test "returns a struct with the correct params" do
-    params = Event |> Repo.week_calendar({2016, 11, 1}) |> Map.get(:params)
+    params = Event |> Repo.week_calendar!({2016, 11, 1}) |> Map.get(:params)
     assert params.day == 1
     assert params.month == 11
     assert params.year == 2016
   end
 
   test "returns a struct with the correct next" do
-    next = Event |> Repo.week_calendar({2016, 12, 31}) |> Map.get(:next)
+    next = Event |> Repo.week_calendar!({2016, 12, 31}) |> Map.get(:next)
     assert next.day == 7
     assert next.month == 1
     assert next.year == 2017
   end
 
   test "returns a struct with the correct prev" do
-    prev = Event |> Repo.week_calendar({2016, 1, 1}) |> Map.get(:prev)
+    prev = Event |> Repo.week_calendar!({2016, 1, 1}) |> Map.get(:prev)
     assert prev.day == 25
     assert prev.month == 12
     assert prev.year == 2015
   end
 
   test "returns a struct with the correct title" do
-    title = Event |> Repo.week_calendar({2016, 11, 1}) |> Map.get(:title)
+    title = Event |> Repo.week_calendar!({2016, 11, 1}) |> Map.get(:title)
     assert title == "30 Oct 2016 - 05 Nov 2016"
   end
 
   test "returns a struct with the correct dates" do
-    dates = Event |> Repo.week_calendar({2016, 11, 1}) |> Map.get(:dates)
+    dates = Event |> Repo.week_calendar!({2016, 11, 1}) |> Map.get(:dates)
     
     start_date = dates |> List.first
     end_date = dates |> List.last

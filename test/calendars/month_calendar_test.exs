@@ -16,33 +16,33 @@ defmodule EZCalendar.MonthCalendarTest do
   end
 
   test "returns a struct with the correct params" do
-    params = Event |> Repo.month_calendar({2016, 11}) |> Map.get(:params)
+    params = Event |> Repo.month_calendar!({2016, 11}) |> Map.get(:params)
     assert params.day == 1
     assert params.month == 11
     assert params.year == 2016
   end
 
   test "returns a struct with the correct next" do
-    next = Event |> Repo.month_calendar({2016, 12}) |> Map.get(:next)
+    next = Event |> Repo.month_calendar!({2016, 12}) |> Map.get(:next)
     assert next.day == 1
     assert next.month == 1
     assert next.year == 2017
   end
 
   test "returns a struct with the correct prev" do
-    prev = Event |> Repo.month_calendar({2016, 1}) |> Map.get(:prev)
+    prev = Event |> Repo.month_calendar!({2016, 1}) |> Map.get(:prev)
     assert prev.day == 1
     assert prev.month == 12
     assert prev.year == 2015
   end
 
   test "returns a struct with the correct title" do
-    title = Event |> Repo.month_calendar({2016, 11}) |> Map.get(:title)
+    title = Event |> Repo.month_calendar!({2016, 11}) |> Map.get(:title)
     assert title == "November 2016"
   end
 
   test "returns a struct with the correct dates" do
-    dates = Event |> Repo.month_calendar({2016, 11}) |> Map.get(:dates) |> List.flatten
+    dates = Event |> Repo.month_calendar!({2016, 11}) |> Map.get(:dates) |> List.flatten
     
     start_date = dates |> List.first
     end_date = dates |> List.last

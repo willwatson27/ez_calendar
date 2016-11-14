@@ -42,6 +42,8 @@ Repo.month_calendar(query, {2016, 11})
 
 Month, week and day calendars exist and can be called with their respective functions or by passing the module in as an argument to `Repo.calendar/4`
 
+If you are not expecting invalid input, **there are also bang! versions of all of the repo methods .**
+
 Custom calendar modules can also be defined, for examples check `lib/calendars`, behaviour is defined in `lib/calendars/calendar.ex`
 ```elixir
 Repo.calendar(query, MyApp.PayrollCalendar, params, opts)
@@ -58,8 +60,16 @@ mix ez_calendar.css
 Build a calendar from the params
 ```elixir
 def index(conn, params) do
-  calendar = Shift |> Repo.month_calendar(params)
-  render(conn, "index.html", calendar: calendar)
+  case Repo.month_calendar(Shift, params) do
+    {:ok, calendar} ->
+      render(conn, "index.html", calendar: calendar)
+    {:error, reason} ->
+      calendar = Repo.month_calendar!(Shift, DateTime.utc_now)
+
+      conn
+      |> put_flash(:error, reason)
+      |> render("index.html", calendar: calendar)
+  end
 end
 ```
 
@@ -84,14 +94,17 @@ Build a calendar using the view helpers
   <% end %> 
 <% end %> 
 ```
-Like the repo functions, there are render functions for each of the built in calendars. You can also use the `calendar/3` function to pass in the HTML module as an arugument
+Like the repo functions, there are render functions for each of the built in calendars. You can also use the `calendar/3` function to pass in the HTML module as an arugument.
 ```eex
 <%= calendar MyApp.PayrollCalendar.HTML, @calendar, fn(date)-> %>
 <% end %>
 ```
 
-The next and previous functions accept the calendar and a string showing how to format the path. The correct parameters will replace ":day", ":month" and ":year". They will also accept a function or string as an optional third argument
+The next and previous functions accept the calendar and a string showing how to format the path. The correct parameters will replace :day, :month and :year. 
+They will also accept a function or string as an optional third argument
 ```eex
+<%= calendar_prev @calendar, "/shifts/:year/:month", "Previous" %>
+
 <%= calendar_next @calendar, "/shifts/:year/:month", fn()-> %>
   <!-- link content -->
 <% end %>
@@ -111,4 +124,14 @@ Repo.month_calendar(query, date, field: :posted_on, tz: "America/Vancouver")
 ```
 
 ## Contributing
-Fork it and submit a pull request, help is very welcome!
+Help is very welcome!
+
+Please make sure all the tests are passing before submitting a pull request.
+Setup the database
+```
+MIX_ENV=test mix ecto.create && mix ecto.migrate
+```
+Run the tests!
+```
+mix test
+```
