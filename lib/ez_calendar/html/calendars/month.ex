@@ -13,7 +13,7 @@ defmodule EZCalendar.HTML.MonthCalendar do
     ]
   end
 
-  def build_weeks weeks, func do
+  defp build_weeks weeks, func do
     weeks |> Enum.map(&content_tag(:tr, build_days(&1, func, __MODULE__)))
   end
 

@@ -1,26 +1,22 @@
 defmodule EZCalendar.DayCalendar do
   @behaviour EZCalendar.Calendar
 
-  import Calendar.Date, only: [to_erl: 1, add!: 2, subtract!: 2]
+  import Calendar.Date, only: [add!: 2, subtract!: 2]
   import EZCalendar, only: [map_from_date: 1]
 
   alias EZCalendar.DayCalendar
-  defstruct [:title, :date, :next, :prev, :params, :weekday]
+  defstruct [:title, :dates, :next, :prev, :params, :weekday]
 
   def date_range(date) do
-    date = date |> to_erl
-
-    start_date = subtract!(date, 1)
-    end_date = add!(date, 1)
-
-    {start_date, end_date} 
+    date = date |> Date.from_erl!
+    {date, date} 
   end 
 
   def build(dates, _date) do
-    info = Enum.at(dates, 1)
+    info = List.first dates
     date = {info.year, info.month, info.day}
     %DayCalendar{
-      date: info,
+      dates: [info],
       title: date |> title,
       weekday: info.weekday,
       next: date |> add!(1) |> map_from_date,

@@ -1,4 +1,4 @@
-defmodule EZCalendar.Builder do
+defmodule EZCalendar.CalendarBuilder do
   import Ecto.Query
   import Calendar.Date, only: [day_of_week_name: 1]
 
@@ -8,9 +8,9 @@ defmodule EZCalendar.Builder do
   end
 
   defp query_results query, repo, start_date, end_date, opts do
-    attr = opts[:field] || Application.get_env(:ez_calendar, :default_field, :date)
-    
-    from( q in query, where:  field(q, ^attr) > ^start_date and field(q, ^attr) < ^end_date)
+    attr = get_field(opts)
+
+    from( q in query, where:  field(q, ^attr) >= ^start_date and field(q, ^attr) <= ^end_date)
     |> repo.all   
   end
 
@@ -27,7 +27,7 @@ defmodule EZCalendar.Builder do
       day: day,
       month: month,
       year: year,
-      data: filter_results(date, results),
+      data: filter_results(date, results, opts),
       weekday: day_of_week_name(date),
       today?: today?(date, opts),
     }
@@ -40,10 +40,15 @@ defmodule EZCalendar.Builder do
     |> Calendar.Date.same_date?(date)
   end
 
-  defp filter_results date, results do
+  defp filter_results date, results, opts do
+    field = get_field(opts)
     Enum.filter(results, fn(result)->
-      Ecto.Date.to_erl(result.date) == date
+      result |> Map.get(field) |> Ecto.Date.to_erl == date
     end)    
+  end
+
+  defp get_field opts do
+    opts[:field] || Application.get_env(:ez_calendar, :default_field, :date)
   end
 
 end
