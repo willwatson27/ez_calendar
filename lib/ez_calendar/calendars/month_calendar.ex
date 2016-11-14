@@ -2,7 +2,7 @@ defmodule EZCalendar.MonthCalendar do
   @behaviour EZCalendar.Calendar
 
   import Calendar.Date, only: [number_of_days_in_month: 1, day_of_week_zb: 1, add!: 2, subtract!: 2]
-  import EZCalendar, only: [map_from_date: 1, month_name: 1]
+  import EZCalendar.ParamParser, only: [to_params: 1]
 
   alias EZCalendar.MonthCalendar
   defstruct [:title, :dates, :next, :prev, :params]
@@ -21,14 +21,14 @@ defmodule EZCalendar.MonthCalendar do
     %MonthCalendar{
       title: title({year, month, day}),
       dates: parse_dates(dates, month),
-      next: date |> next |> map_from_date, 
-      prev: date |> prev |> map_from_date, 
-      params: {year, month, day} |> map_from_date,
+      next: date |> next |> to_params, 
+      prev: date |> prev |> to_params, 
+      params: {year, month, day} |> to_params,
     } 
   end
 
   defp title {year, month, day} do
-    month = month_name({year, month, day})
+    month = {year, month, day} |> Calendar.Date.from_erl! |> Calendar.Strftime.strftime!("%B")
     "#{month} #{year}"
   end
 

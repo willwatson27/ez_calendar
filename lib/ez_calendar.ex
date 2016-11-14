@@ -36,17 +36,5 @@ defmodule EZCalendar do
     |> calendar.build(date)
   end 
 
-  def month_name(date) do
-    date 
-    |> Calendar.Date.from_erl! 
-    |> Calendar.Strftime.strftime!("%B")
-  end
-
-  def map_from_date(date) do
-    {y, m, d} = Calendar.Date.to_erl(date)
-    %{year: y, month: m, day: d}
-  end
-
-
 end
 

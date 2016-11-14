@@ -17,19 +17,18 @@ defmodule EZCalendar.HTML.Navigation do
     |> build_link(content, "calendar-prev")
   end
 
-  def build_path path, params do
+  defp build_path path, params do
     path
     |> replace(~r{:year}, "#{params.year}")
     |> replace(~r{:month}, "#{params.month}")
     |> replace(~r{:day}, "#{params.day}")   
   end
 
-
-  def build_link(path, content, class) when is_function(content) do
+  defp build_link(path, content, class) when is_function(content) do
     link(content.(), to: path, class: class)
   end 
 
-  def build_link(path, content, class) do
+  defp build_link(path, content, class) do
     link(content, to: path, class: class)
   end 
 

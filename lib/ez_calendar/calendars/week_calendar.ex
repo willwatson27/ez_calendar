@@ -2,7 +2,7 @@ defmodule EZCalendar.WeekCalendar do
   @behaviour EZCalendar.Calendar
 
   import Calendar.Date, only: [to_erl: 1, day_of_week_zb: 1, add!: 2, subtract!: 2]
-  import EZCalendar, only: [map_from_date: 1]
+  import EZCalendar.ParamParser, only: [to_params: 1]
 
   alias EZCalendar.WeekCalendar
   defstruct [:title, :dates, :next, :prev, :params]
@@ -27,9 +27,9 @@ defmodule EZCalendar.WeekCalendar do
     %WeekCalendar{
       title: date |> title,
       dates: dates,
-      next: date |> add!(7) |> map_from_date,
-      prev: date |> subtract!(7) |> map_from_date,
-      params: {y, m, d} |> map_from_date,
+      next: date |> add!(7) |> to_params,
+      prev: date |> subtract!(7) |> to_params,
+      params: {y, m, d} |> to_params,
     }
   end
 

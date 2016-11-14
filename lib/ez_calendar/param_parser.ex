@@ -9,7 +9,7 @@ defmodule EZCalendar.ParamParser do
     day = get_value(date, :day, 1)
     month = get_value(date, :month)
     year = get_value(date, :year)
-    {year, month, day}
+    do_erl({year, month, day})
   end 
 
   defp do_erl({y, m}) do
@@ -31,5 +31,14 @@ defmodule EZCalendar.ParamParser do
 
   defp cast_int(i) when is_integer(i), do: i
   defp cast_int(i) when is_binary(i), do: String.to_integer(i)
+
+  
+  @doc """
+  Formats an erl into map representing the date
+  """
+  def to_params(date) do
+    {y, m, d} = Calendar.Date.to_erl(date)
+    %{year: y, month: m, day: d}
+  end
  
 end

@@ -3,7 +3,7 @@ defmodule EZCalendar.Mixfile do
 
   def project do
     [app: :ez_calendar,
-     version: "0.1.2",
+     version: "0.1.3",
      elixir: "~> 1.3",
      elixirc_paths: path(Mix.env),
      build_embedded: Mix.env == :prod,

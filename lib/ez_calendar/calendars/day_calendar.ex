@@ -2,7 +2,7 @@ defmodule EZCalendar.DayCalendar do
   @behaviour EZCalendar.Calendar
 
   import Calendar.Date, only: [add!: 2, subtract!: 2]
-  import EZCalendar, only: [map_from_date: 1]
+  import EZCalendar.ParamParser, only: [to_params: 1]
 
   alias EZCalendar.DayCalendar
   defstruct [:title, :dates, :next, :prev, :params, :weekday]
@@ -19,9 +19,9 @@ defmodule EZCalendar.DayCalendar do
       dates: [info],
       title: date |> title,
       weekday: info.weekday,
-      next: date |> add!(1) |> map_from_date,
-      prev: date |> subtract!(1) |> map_from_date,
-      params: date |> map_from_date,
+      next: date |> add!(1) |> to_params,
+      prev: date |> subtract!(1) |> to_params,
+      params: date |> to_params,
     }
     |> struct(info)
   end

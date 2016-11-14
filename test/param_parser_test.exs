@@ -2,6 +2,7 @@ defmodule EZCalendar.ParamParserTest do
   use ExUnit.Case
   alias EZCalendar.Repo
   alias EZCalendar.Event
+  alias EZCalendar.ParamParser
 
   alias EZCalendar.{MonthCalendar, DayCalendar}
 
@@ -23,6 +24,11 @@ defmodule EZCalendar.ParamParserTest do
     assert calendar.__struct__ == MonthCalendar    
   end
 
+  test "param values can be strings" do
+     calendar = Event |> Repo.calendar(MonthCalendar, %{"day" => "2016", "month" => "10", "year" => "2016"})
+    assert calendar.__struct__ == MonthCalendar      
+  end
+
   test "params can be a DateTime" do
     calendar = Event |> Repo.calendar(MonthCalendar, DateTime.utc_now)
     assert calendar.__struct__ == MonthCalendar       
@@ -36,6 +42,14 @@ defmodule EZCalendar.ParamParserTest do
   test "the day can be ommited on month calendars" do
     calendar = Event |> Repo.calendar(MonthCalendar, {2016, 11})
     assert calendar.__struct__ == MonthCalendar    
+  end
+
+  test "converts an erl into a map" do
+    date = ParamParser.to_params({2016, 11, 1})
+
+    assert date.day == 1
+    assert date.month == 11
+    assert date.year == 2016
   end
 
 end
