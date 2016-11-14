@@ -73,9 +73,9 @@ end
 
 Build a calendar using the view helpers
 ```eex
-<%= calendar_prev @calendar, "/shifts/:year/:month", "<" %>
+<%= calendar_prev @calendar, "/shifts/:year/:month" %>
 <%= @calendar.title %>
-<%= calendar_next @calendar, "/shifts/:year/:month", ">" %>
+<%= calendar_next @calendar, "/shifts/:year/:month" %>
 
 <%= month_calendar @calendar, fn(date)-> %>
   <!-- calendar date -->
@@ -93,6 +93,7 @@ Like the repo functions, there are render functions for each of the built in cal
 The next and previous functions accept the calendar and a string showing how to format the path. The correct parameters will replace ":day", ":month" and ":year". They will also accept a function or string as an optional third argument
 ```eex
 <%= calendar_next @calendar, "/shifts/:year/:month", fn()-> %>
+  <!-- link content -->
 <% end %>
 ```
 
