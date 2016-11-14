@@ -1,5 +1,5 @@
 defmodule EZCalendar.ParamParserTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   alias EZCalendar.ParamParser
 
   setup do

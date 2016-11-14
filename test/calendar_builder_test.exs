@@ -1,5 +1,5 @@
 defmodule EZCalendar.CalendarBuilderTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   alias EZCalendar.Repo
   alias EZCalendar.Event
   alias EZCalendar.CalendarBuilder
@@ -14,10 +14,10 @@ defmodule EZCalendar.CalendarBuilderTest do
 
   defp create_event date, posted_on \\ nil do
     posted = posted_on || date
-    %Event{ title: "Event", date: Date.from_erl!(date) |> Ecto.Date.cast!, posted_on: Date.from_erl!(posted) |> Ecto.Date.cast! } |> Repo.insert!
+    %Event{ title: "Event", date: Date.from_erl!(date) |> Ecto.Date.cast!, posted_on: Date.from_erl!(posted) |> Ecto.Date.cast! } 
+    |> Repo.insert!
   end
  
-
   test "calendar dates have a today? flag" do
     today = DateTime.utc_now |> DateTime.to_date
     date = build_dates(today, today) |> List.first

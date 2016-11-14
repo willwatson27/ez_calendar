@@ -8,6 +8,9 @@ defmodule EZCalendar.Mixfile do
      elixirc_paths: path(Mix.env),
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
+     test_coverage: [tool: ExCoveralls],
+     preferred_cli_env: ["coveralls": :test, "coveralls.detail": :test, "coveralls.post": :test, "coveralls.html": :test],
+    
      package: package,
      description: "A library for building calendars in ecto and phoenix",
      deps: deps()]
@@ -30,7 +33,7 @@ defmodule EZCalendar.Mixfile do
 
 
   defp path(:test) do
-    ["lib", "test/support"]
+    ["lib", "test/support", "test/fixtures"]
   end
   defp path(_), do: ["lib"]  
 
@@ -41,7 +44,9 @@ defmodule EZCalendar.Mixfile do
       {:calendar, "~> 0.16.1"},
 
       {:ex_doc, ">= 0.0.0", only: :dev},
-      {:postgrex, "~> 0.12.0", only: [:test]}
+
+      {:postgrex, "~> 0.12.0", only: :test},
+      {:excoveralls, "~> 0.5", only: :test},
     ]
   end
 end

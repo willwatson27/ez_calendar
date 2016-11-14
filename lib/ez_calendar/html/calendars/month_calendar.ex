@@ -3,14 +3,12 @@ defmodule EZCalendar.HTML.MonthCalendar do
   import EZCalendar.HTML.CalendarUtil, only: [build_days: 3, build_weekdays: 0]
 
   def build calendar, func do
-    [
-      content_tag(:table, 
-        [
-          content_tag(:tr, build_weekdays), 
-          build_weeks(calendar.dates, func)
-        ], class: "ez-calendar"
-      )
-    ]
+    content_tag(:table, class: "ez-calendar") do
+      [
+        content_tag(:tr, build_weekdays), 
+        build_weeks(calendar.dates, func)
+      ]
+    end
   end
 
   defp build_weeks weeks, func do

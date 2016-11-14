@@ -1,5 +1,5 @@
 defmodule EZCalendar.DayCalendarTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   alias EZCalendar.Repo
   alias EZCalendar.Event
   alias EZCalendar.DayCalendar

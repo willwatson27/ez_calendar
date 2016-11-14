@@ -8,4 +8,5 @@ defmodule EZCalendar.Event do
 
     timestamps
   end
+
 end

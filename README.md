@@ -42,7 +42,7 @@ Repo.month_calendar(query, {2016, 11})
 
 Month, week and day calendars exist and can be called with their respective functions or by passing the module in as an argument to `Repo.calendar/4`. Additionally, all Repo functions have a bang **!** variant.
 
-Custom calendar modules can also be defined, for examples check `lib/calendars`, behaviour is defined in `lib/calendars/calendar.ex`
+Custom calendar modules can be defined, for examples check `lib/calendars`, behaviour is defined in `lib/calendars/calendar.ex`
 ```elixir
 Repo.calendar(query, MyApp.PayrollCalendar, params, opts)
 ```
@@ -52,7 +52,7 @@ Repo.calendar(query, MyApp.PayrollCalendar, params, opts)
 Install the stylesheets.
 
 ```
-mix ez_calendar.css
+$ mix ez_calendar.css
 ```
 
 Build a calendar from the params
@@ -127,9 +127,9 @@ Help is very welcome! Please make sure all the tests are passing before submitti
 
 Setup the database
 ```
-MIX_ENV=test mix ecto.create && mix ecto.migrate
+$ MIX_ENV=test mix ecto.create && mix ecto.migrate
 ```
 Run the tests!
 ```
-mix test
+$ mix test
 ```
