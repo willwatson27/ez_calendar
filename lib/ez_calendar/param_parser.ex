@@ -23,10 +23,6 @@ defmodule EZCalendar.ParamParser do
     {cast_int(y), cast_int(m), cast_int(d)}
   end
 
-  defp build_erl(date) do
-    date |> Calendar.Date.to_erl
-  end
-
   defp get_value(date, key, default \\ nil) do
     string = Atom.to_string(key)
 
@@ -44,7 +40,6 @@ defmodule EZCalendar.ParamParser do
     end
   end
 
-  
   @doc """
   Formats an erl into map representing the date
   """

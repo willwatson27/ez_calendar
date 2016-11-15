@@ -21,20 +21,25 @@ defmodule EZCalendar.ParamParserTest do
   end
 
   test "params can be an erl/tuple" do
-    {response, _} = ParamParser.to_erl({2016, 11, 1})
-    assert response == :ok        
+    {:ok, date} = ParamParser.to_erl({2016, 11, 1})
+    assert date == {2016, 11, 1}       
+  end
+
+  test "erl/tuple can be strings" do
+    {:ok, date} = ParamParser.to_erl({"2016", "11", "15"})
+    assert date == {2016, 11, 15}       
   end
 
   test "params can be a map containing the day month and year" do
-    {response, _} = ParamParser.to_erl(%{day: 1, month: 10, year: 2016})
-    assert response == :ok  
-    {response, _} = ParamParser.to_erl(%{"day" => 1, "month" => 10, "year" => 2016})
-    assert response == :ok     
+    {:ok, date} = ParamParser.to_erl(%{day: 1, month: 10, year: 2016})
+    assert date == {2016, 10, 1}
+    {:ok, date} = ParamParser.to_erl(%{"day" => 1, "month" => 10, "year" => 2016})
+    assert date == {2016, 10, 1}     
   end
 
   test "param values can be strings" do  
-    {response, _} = ParamParser.to_erl(%{"day" => "1", "month" => "10", "year" => "2016"})
-    assert response == :ok 
+    {:ok, date} = ParamParser.to_erl(%{"day" => "1", "month" => "10", "year" => "2016"})
+    assert date == {2016, 10, 1}
   end
 
   test "params can be a DateTime type" do
@@ -43,8 +48,8 @@ defmodule EZCalendar.ParamParserTest do
   end
 
   test "params can be a Date type" do
-    {response, _} = ParamParser.to_erl(~D[2016-11-01])
-    assert response == :ok
+    {:ok, date} = ParamParser.to_erl(~D[2016-11-03])
+    assert date == {2016, 11, 3}
   end
 
   test "missing day param returns the first of the month" do
