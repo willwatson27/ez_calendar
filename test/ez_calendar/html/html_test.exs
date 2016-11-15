@@ -1,5 +1,5 @@
 defmodule EZCalendar.HTMLTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   alias EZCalendar.HTML
 
   setup do
@@ -10,7 +10,7 @@ defmodule EZCalendar.HTMLTest do
     EZCalendar.Event |> EZCalendar.Repo.calendar!(calendar_module, {3016, 11, 1})
   end
  
-  test "cal" do
+  test "builds a calendar for a given html module" do
     calendar = build_calendar(EZCalendar.MonthCalendar)
     html = HTML.calendar(EZCalendar.HTML.MonthCalendar, calendar, fn(_)-> " " end)
 
@@ -18,7 +18,7 @@ defmodule EZCalendar.HTMLTest do
     assert result == :safe
   end
  
-  test "month" do
+  test "builds html for a month calendar" do
     calendar = build_calendar(EZCalendar.MonthCalendar)
     html = HTML.month_calendar(calendar, fn(_)-> " " end)
 
@@ -26,7 +26,7 @@ defmodule EZCalendar.HTMLTest do
     assert result == :safe
   end
  
-  test "week" do
+  test "builds html for a week calendar" do
     calendar = build_calendar(EZCalendar.WeekCalendar)
     html = HTML.week_calendar(calendar, fn(_)-> " " end)
 
@@ -34,7 +34,7 @@ defmodule EZCalendar.HTMLTest do
     assert result == :safe
   end
  
-  test "day" do
+  test "builds html for a day calendar" do
     calendar = build_calendar(EZCalendar.DayCalendar)
     html = HTML.day_calendar(calendar, fn(_)-> " " end)
 

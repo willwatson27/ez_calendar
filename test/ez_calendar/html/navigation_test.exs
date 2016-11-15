@@ -1,8 +1,6 @@
 defmodule EZCalendar.HTML.NavigationTest do
-  use ExUnit.Case
-  use Phoenix.HTML
-  alias EZCalendar.Repo
-  alias EZCalendar.Event
+  use ExUnit.Case, async: true
+  alias EZCalendar.{Repo, Event}
   alias EZCalendar.HTML.Navigation
 
   setup do

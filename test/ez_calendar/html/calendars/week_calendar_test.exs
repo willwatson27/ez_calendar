@@ -1,5 +1,5 @@
 defmodule EZCalendar.HTML.WeekCalendarTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   alias EZCalendar.HTML.WeekCalendar
 
   setup do

@@ -56,4 +56,22 @@ defmodule EZCalendar.MonthCalendarTest do
     assert end_date.year == 2016
   end
 
+  test "can accept its next value as its params" do
+    calendar = Repo.month_calendar!(Event, {2016, 1})
+    next = Repo.month_calendar!(Event, Map.get(calendar, :next)) |> Map.get(:params)
+
+    assert next.day == 1
+    assert next.month == 2
+    assert next.year == 2016
+  end
+
+  test "can accept its prev value as its params" do
+    calendar = Repo.month_calendar!(Event, {2016, 1})
+    prev = Repo.month_calendar!(Event, Map.get(calendar, :prev)) |> Map.get(:params)
+
+    assert prev.day == 1
+    assert prev.month == 12
+    assert prev.year == 2015
+  end
+
 end

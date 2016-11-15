@@ -51,14 +51,15 @@ defmodule EZCalendar.Fixtures.MonthCalendar do
       ], 
       next: %{day: 1, month: 12, year: 2016},
       params: %{day: 1, month: 11, year: 2016},
-      prev: %{day: 1, month: 10, year: 2016}, title: "November 2016"
+      prev: %{day: 1, month: 10, year: 2016}, 
+      title: "November 2016"
     }    
   end
 
   def html do
     """
     <table class="ez-calendar">\
-    <tr>\
+    <tr class="weekdays">\
     <td>Sunday</td>\
     <td>Monday</td>\
     <td>Tuesday</td>\

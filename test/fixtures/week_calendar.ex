@@ -71,7 +71,7 @@ defmodule EZCalendar.Fixtures.WeekCalendar do
   def html do
     """
     <table class="ez-calendar">\
-    <tr>\
+    <tr class="weekdays">\
     <td>Sunday</td>\
     <td>Monday</td>\
     <td>Tuesday</td>\

@@ -114,7 +114,7 @@ They will also accept a function or string as an optional third argument
 config :ez_calendar, 
   default_tz: "UTC",      # default / TZ data format / used to add "today" flag
   default_field: :date,   # default / date type / schema accessor for building calendar structs
-  default_next: ">",   # default text for navigation links
+  default_next: ">",      # default text for navigation links
   default_prev: "<",   
 ```
 The field and timezone can also be changed on a per query basis

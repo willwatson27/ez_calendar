@@ -1,5 +1,5 @@
 defmodule EZCalendar.HTML.DayCalendarTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   alias EZCalendar.HTML.DayCalendar
 
   setup do

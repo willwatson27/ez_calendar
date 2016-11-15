@@ -1,3 +1,4 @@
+
 defmodule EZCalendar.MonthCalendar do
   @behaviour EZCalendar.Calendar
 
@@ -19,17 +20,18 @@ defmodule EZCalendar.MonthCalendar do
     {year, month, day} = month_first(date)
 
     %MonthCalendar{
-      title: title({year, month, day}),
-      dates: parse_dates(dates, month),
+      title: date |> title,
+      dates: dates |> parse_dates(month),
       next: date |> next |> to_params, 
       prev: date |> prev |> to_params, 
       params: {year, month, day} |> to_params,
     } 
   end
 
-  defp title {year, month, day} do
-    month = {year, month, day} |> Calendar.Date.from_erl! |> Calendar.Strftime.strftime!("%B")
-    "#{month} #{year}"
+  defp title date do
+    date 
+    |> Calendar.Date.from_erl! 
+    |> Calendar.Strftime.strftime!("%B %Y")
   end
 
   defp parse_dates dates, month do

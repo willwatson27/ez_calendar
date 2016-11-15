@@ -5,7 +5,7 @@ defmodule EZCalendar.HTML.MonthCalendar do
   def build calendar, func do
     content_tag(:table, class: "ez-calendar") do
       [
-        content_tag(:tr, build_weekdays), 
+        build_weekdays, 
         build_weeks(calendar.dates, func)
       ]
     end

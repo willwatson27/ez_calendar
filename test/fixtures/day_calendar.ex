@@ -6,15 +6,17 @@ defmodule EZCalendar.Fixtures.DayCalendar do
         [
           %{
             data: [%EZCalendar.Event{}],
-            day: 1, month: 11,
-            today?: false, 
+            day: 1, 
+            month: 11,
+            today?: true, 
             weekday: "Tuesday", 
             year: 2016
           }
         ],
       next: %{day: 2, month: 11, year: 2016},
       params: %{day: 1, month: 11, year: 2016},
-      prev: %{day: 31, month: 10, year: 2016}, title: "November 1, 2016",
+      prev: %{day: 31, month: 10, year: 2016}, 
+      title: "November 1, 2016",
       weekday: "Tuesday"
     }
   end
@@ -25,13 +27,15 @@ defmodule EZCalendar.Fixtures.DayCalendar do
     <tr class="weekday">\
     <td>Tuesday</td>\
     </tr>\
-    <td class="day">\
+    <tr>\
+    <td class="today day">\
     <div class="date">1</div>\
     <div class="data">\
     <div>Date Content</div>\
     <div>Event Content</div>\
     </div>\
     </td>\
+    </tr>\
     </table>\
     """
   end

@@ -1,7 +1,3 @@
-.calendar-next{}
-
-.calendar-prev{}
-
 table.ez-calendar {
   -webkit-border-horizontal-spacing: 0px;
   -webkit-border-vertical-spacing: 0px;
@@ -13,9 +9,7 @@ table.ez-calendar {
   width: 100%;
 }
 
-.ez-calendar tr {
-  border-collapse: collapse;
-}
+.ez-calendar tr {border-collapse: collapse;}
 
 .ez-calendar th {
   padding: 6px;
@@ -48,31 +42,29 @@ table.ez-calendar {
   border-left-width: 1px;
 }
 
-.ez-calendar .day {
-  height: 120px;
-}
+.ez-calendar td.today {background: #FFFFC0}
 
-.ez-calendar .day .date {
-  color: grey;
-}
+.ez-calendar td.sunday     {}
+.ez-calendar td.monday     {}
+.ez-calendar td.tuesday    {}
+.ez-calendar td.wednesday  {}
+.ez-calendar td.thursday   {}
+.ez-calendar td.friday     {}
+.ez-calendar td.saturday   {}
 
-.ez-calendar .weekday {
-  text-align: center;
-}
+.ez-calendar td.day {height: 150px;}
+.ez-calendar td.day .date {color: grey;}
+.ez-calendar td.day .data {}
 
-.ez-calendar .sunday     {}
-.ez-calendar .monday     {}
-.ez-calendar .tuesday    {}
-.ez-calendar .wednesday  {}
-.ez-calendar .thursday   {}
-.ez-calendar .friday     {}
-.ez-calendar .saturday   {}
+/* month/week calendars - row for days of the week */
+.ez-calendar tr.weekdays {} 
 
-.ez-calendar .today {
-  background: #FFFFC0
-}
+/* month calendar - days not in current month */
+.ez-calendar td.trailing {opacity: 0.5;} 
 
-.ez-calendar .trailing {
-  opacity: 0.5;
-}
+/* day calendar- day of the week */
+.ez-calendar td.weekday {text-align: center;} 
 
+/* navigation links */
+.calendar-next{}
+.calendar-prev{}
