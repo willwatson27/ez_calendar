@@ -1,33 +1,14 @@
 defmodule EZCalendar.HTML.DayCalendar do
   use Phoenix.HTML
+  import EZCalendar.HTML.CalendarUtil, only: [build_calendar_row: 2, build_weekdays: 1]
 
   def build calendar, func do
-    content_tag(:table, class: "ez-calendar") do
+    content_tag(:table, class: "ez-calendar day-calendar") do
       [
-        content_tag(:tr, class: "weekday") do
-          content_tag(:td, calendar.weekday)
-        end, 
-        build_day(calendar.dates, func)
+        build_weekdays([calendar.weekday]), 
+        build_calendar_row(calendar.dates, func)
       ]
     end
   end
 
-  defp day_class date do
-    class = ["day"]
-    class = if date.today?, do: ["today" | class], else: class 
-    class |> Enum.join(" ")
-  end
-
-  defp build_day dates, func do
-    date = dates |> List.first 
-
-    content_tag(:tr) do
-      content_tag(:td, class: day_class(date)) do
-        [
-          content_tag(:div, date.day, class: "date"), 
-          content_tag(:div, func.(date), class: "data")
-        ]
-      end
-    end
-  end
 end

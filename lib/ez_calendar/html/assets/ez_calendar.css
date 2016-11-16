@@ -9,7 +9,9 @@ table.ez-calendar {
   width: 100%;
 }
 
-.ez-calendar tr {border-collapse: collapse;}
+.ez-calendar tr {
+  border-collapse: collapse;
+}
 
 .ez-calendar th {
   padding: 6px;
@@ -42,7 +44,7 @@ table.ez-calendar {
   border-left-width: 1px;
 }
 
-.ez-calendar td.today {background: #FFFFC0}
+.ez-calendar tr.weekdays {} 
 
 .ez-calendar td.sunday     {}
 .ez-calendar td.monday     {}
@@ -52,18 +54,23 @@ table.ez-calendar {
 .ez-calendar td.friday     {}
 .ez-calendar td.saturday   {}
 
-.ez-calendar td.day {height: 150px;}
-.ez-calendar td.day .date {color: grey;}
+.ez-calendar td.today {
+  background: #FFFFC0
+}
+
+.ez-calendar td.day {
+  height: 150px;
+}
+.ez-calendar td.day .date {
+  color: grey;
+}
 .ez-calendar td.day .data {}
 
-/* month/week calendars - row for days of the week */
-.ez-calendar tr.weekdays {} 
 
 /* month calendar - days not in current month */
-.ez-calendar td.trailing {opacity: 0.5;} 
-
-/* day calendar- day of the week */
-.ez-calendar td.weekday {text-align: center;} 
+.ez-calendar td.trailing {
+  opacity: 0.5;
+} 
 
 /* navigation links */
 .calendar-next{}

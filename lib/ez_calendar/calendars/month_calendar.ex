@@ -1,4 +1,3 @@
-
 defmodule EZCalendar.MonthCalendar do
   @behaviour EZCalendar.Calendar
 

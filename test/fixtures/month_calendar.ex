@@ -58,7 +58,7 @@ defmodule EZCalendar.Fixtures.MonthCalendar do
 
   def html do
     """
-    <table class="ez-calendar">\
+    <table class="ez-calendar month-calendar">\
     <tr class="weekdays">\
     <td>Sunday</td>\
     <td>Monday</td>\
@@ -69,14 +69,14 @@ defmodule EZCalendar.Fixtures.MonthCalendar do
     <td>Saturday</td>\
     </tr>\
     <tr>\
-    <td class="today trailing day sunday">\
+    <td class="trailing today sunday day">\
     <div class="date">30</div>\
     <div class="data">\
     <div>Date Content</div>\
     <div>Event Content</div>\
     </div>\
     </td>\
-    <td class="trailing day monday">\
+    <td class="trailing monday day">\
     <div class="date">31</div>\
     <div class="data">\
     <div>Date Content</div>\
@@ -84,7 +84,7 @@ defmodule EZCalendar.Fixtures.MonthCalendar do
     </div>\
     </div>\
     </td>\
-    <td class="day tuesday">\
+    <td class="tuesday day">\
     <div class="date">1</div>\
     <div class="data">\
     <div>Date Content</div>\
@@ -92,7 +92,7 @@ defmodule EZCalendar.Fixtures.MonthCalendar do
     </div>\
     </div>\
     </td>\
-    <td class="day wednesday">\
+    <td class="wednesday day">\
     <div class="date">2</div>\
     <div class="data">\
     <div>Date Content</div>\
@@ -100,7 +100,7 @@ defmodule EZCalendar.Fixtures.MonthCalendar do
     </div>\
     </div>\
     </td>\
-    <td class="day thursday">\
+    <td class="thursday day">\
     <div class="date">3</div>\
     <div class="data">\
     <div>Date Content</div>\
@@ -108,7 +108,7 @@ defmodule EZCalendar.Fixtures.MonthCalendar do
     </div>\
     </div>\
     </td>\
-    <td class="day friday">\
+    <td class="friday day">\
     <div class="date">4</div>\
     <div class="data">\
     <div>Date Content</div>\
@@ -116,7 +116,7 @@ defmodule EZCalendar.Fixtures.MonthCalendar do
     </div>\
     </div>\
     </td>\
-    <td class="day saturday">\
+    <td class="saturday day">\
     <div class="date">5</div>\
     <div class="data">\
     <div>Date Content</div>\
@@ -126,7 +126,7 @@ defmodule EZCalendar.Fixtures.MonthCalendar do
     </td>\
     </tr>\
     <tr>\
-    <td class="day sunday">\
+    <td class="sunday day">\
     <div class="date">6</div>\
     <div class="data">\
     <div>Date Content</div>\
@@ -134,7 +134,7 @@ defmodule EZCalendar.Fixtures.MonthCalendar do
     </div>\
     </div>\
     </td>\
-    <td class="day monday">\
+    <td class="monday day">\
     <div class="date">7</div>\
     <div class="data">\
     <div>Date Content</div>\
@@ -142,7 +142,7 @@ defmodule EZCalendar.Fixtures.MonthCalendar do
     </div>\
     </div>\
     </td>\
-    <td class="day tuesday">\
+    <td class="tuesday day">\
     <div class="date">8</div>\
     <div class="data">\
     <div>Date Content</div>\
@@ -150,7 +150,7 @@ defmodule EZCalendar.Fixtures.MonthCalendar do
     </div>\
     </div>\
     </td>\
-    <td class="day wednesday">\
+    <td class="wednesday day">\
     <div class="date">9</div>\
     <div class="data">\
     <div>Date Content</div>\
@@ -158,7 +158,7 @@ defmodule EZCalendar.Fixtures.MonthCalendar do
     </div>\
     </div>\
     </td>\
-    <td class="day thursday">\
+    <td class="thursday day">\
     <div class="date">10</div>\
     <div class="data">\
     <div>Date Content</div>\
@@ -166,7 +166,7 @@ defmodule EZCalendar.Fixtures.MonthCalendar do
     </div>\
     </div>\
     </td>\
-    <td class="day friday">\
+    <td class="friday day">\
     <div class="date">11</div>\
     <div class="data">\
     <div>Date Content</div>\
@@ -174,7 +174,7 @@ defmodule EZCalendar.Fixtures.MonthCalendar do
     </div>\
     </div>\
     </td>\
-    <td class="day saturday">\
+    <td class="saturday day">\
     <div class="date">12</div>\
     <div class="data">\
     <div>Date Content</div>\
@@ -184,7 +184,7 @@ defmodule EZCalendar.Fixtures.MonthCalendar do
     </td>\
     </tr>\
     <tr>\
-    <td class="day sunday">\
+    <td class="sunday day">\
     <div class="date">13</div>\
     <div class="data">\
     <div>Date Content</div>\
@@ -192,7 +192,7 @@ defmodule EZCalendar.Fixtures.MonthCalendar do
     </div>\
     </div>\
     </td>\
-    <td class="day monday">\
+    <td class="monday day">\
     <div class="date">14</div>\
     <div class="data">\
     <div>Date Content</div>\
@@ -200,7 +200,7 @@ defmodule EZCalendar.Fixtures.MonthCalendar do
     </div>\
     </div>\
     </td>\
-    <td class="day tuesday">\
+    <td class="tuesday day">\
     <div class="date">15</div>\
     <div class="data">\
     <div>Date Content</div>\
@@ -208,7 +208,7 @@ defmodule EZCalendar.Fixtures.MonthCalendar do
     </div>\
     </div>\
     </td>\
-    <td class="day wednesday">\
+    <td class="wednesday day">\
     <div class="date">16</div>\
     <div class="data">\
     <div>Date Content</div>\
@@ -216,7 +216,7 @@ defmodule EZCalendar.Fixtures.MonthCalendar do
     </div>\
     </div>\
     </td>\
-    <td class="day thursday">\
+    <td class="thursday day">\
     <div class="date">17</div>\
     <div class="data">\
     <div>Date Content</div>\
@@ -224,7 +224,7 @@ defmodule EZCalendar.Fixtures.MonthCalendar do
     </div>\
     </div>\
     </td>\
-    <td class="day friday">\
+    <td class="friday day">\
     <div class="date">18</div>\
     <div class="data">\
     <div>Date Content</div>\
@@ -232,7 +232,7 @@ defmodule EZCalendar.Fixtures.MonthCalendar do
     </div>\
     </div>\
     </td>\
-    <td class="day saturday">\
+    <td class="saturday day">\
     <div class="date">19</div>\
     <div class="data">\
     <div>Date Content</div>\
@@ -242,7 +242,7 @@ defmodule EZCalendar.Fixtures.MonthCalendar do
     </td>\
     </tr>\
     <tr>\
-    <td class="day sunday">\
+    <td class="sunday day">\
     <div class="date">20</div>\
     <div class="data">\
     <div>Date Content</div>\
@@ -250,7 +250,7 @@ defmodule EZCalendar.Fixtures.MonthCalendar do
     </div>\
     </div>\
     </td>\
-    <td class="day monday">\
+    <td class="monday day">\
     <div class="date">21</div>\
     <div class="data">\
     <div>Date Content</div>\
@@ -258,7 +258,7 @@ defmodule EZCalendar.Fixtures.MonthCalendar do
     </div>\
     </div>\
     </td>\
-    <td class="day tuesday">\
+    <td class="tuesday day">\
     <div class="date">22</div>\
     <div class="data">\
     <div>Date Content</div>\
@@ -266,7 +266,7 @@ defmodule EZCalendar.Fixtures.MonthCalendar do
     </div>\
     </div>\
     </td>\
-    <td class="day wednesday">\
+    <td class="wednesday day">\
     <div class="date">23</div>\
     <div class="data">\
     <div>Date Content</div>\
@@ -274,7 +274,7 @@ defmodule EZCalendar.Fixtures.MonthCalendar do
     </div>\
     </div>\
     </td>\
-    <td class="day thursday">\
+    <td class="thursday day">\
     <div class="date">24</div>\
     <div class="data">\
     <div>Date Content</div>\
@@ -282,7 +282,7 @@ defmodule EZCalendar.Fixtures.MonthCalendar do
     </div>\
     </div>\
     </td>\
-    <td class="day friday">\
+    <td class="friday day">\
     <div class="date">25</div>\
     <div class="data">\
     <div>Date Content</div>\
@@ -290,7 +290,7 @@ defmodule EZCalendar.Fixtures.MonthCalendar do
     </div>\
     </div>\
     </td>\
-    <td class="day saturday">\
+    <td class="saturday day">\
     <div class="date">26</div>\
     <div class="data">\
     <div>Date Content</div>\
@@ -300,7 +300,7 @@ defmodule EZCalendar.Fixtures.MonthCalendar do
     </td>\
     </tr>\
     <tr>\
-    <td class="day sunday">\
+    <td class="sunday day">\
     <div class="date">27</div>\
     <div class="data">\
     <div>Date Content</div>\
@@ -308,7 +308,7 @@ defmodule EZCalendar.Fixtures.MonthCalendar do
     </div>\
     </div>\
     </td>\
-    <td class="day monday">\
+    <td class="monday day">\
     <div class="date">28</div>\
     <div class="data">\
     <div>Date Content</div>\
@@ -316,7 +316,7 @@ defmodule EZCalendar.Fixtures.MonthCalendar do
     </div>\
     </div>\
     </td>\
-    <td class="day tuesday">\
+    <td class="tuesday day">\
     <div class="date">29</div>\
     <div class="data">\
     <div>Date Content</div>\
@@ -324,7 +324,7 @@ defmodule EZCalendar.Fixtures.MonthCalendar do
     </div>\
     </div>\
     </td>\
-    <td class="day wednesday">\
+    <td class="wednesday day">\
     <div class="date">30</div>\
     <div class="data">\
     <div>Date Content</div>\
@@ -332,7 +332,7 @@ defmodule EZCalendar.Fixtures.MonthCalendar do
     </div>\
     </div>\
     </td>\
-    <td class="trailing day thursday">\
+    <td class="trailing thursday day">\
     <div class="date">1</div>\
     <div class="data">\
     <div>Date Content</div>\
@@ -340,7 +340,7 @@ defmodule EZCalendar.Fixtures.MonthCalendar do
     </div>\
     </div>\
     </td>\
-    <td class="trailing day friday">\
+    <td class="trailing friday day">\
     <div class="date">2</div>\
     <div class="data">\
     <div>Date Content</div>\
@@ -348,7 +348,7 @@ defmodule EZCalendar.Fixtures.MonthCalendar do
     </div>\
     </div>\
     </td>\
-    <td class="trailing day saturday">\
+    <td class="trailing saturday day">\
     <div class="date">3</div>\
     <div class="data">\
     <div>Date Content</div>\

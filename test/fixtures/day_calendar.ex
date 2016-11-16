@@ -23,12 +23,12 @@ defmodule EZCalendar.Fixtures.DayCalendar do
 
   def html do
     """
-    <table class="ez-calendar">\
-    <tr class="weekday">\
+    <table class="ez-calendar day-calendar">\
+    <tr class="weekdays">\
     <td>Tuesday</td>\
     </tr>\
     <tr>\
-    <td class="today day">\
+    <td class="today tuesday day">\
     <div class="date">1</div>\
     <div class="data">\
     <div>Date Content</div>\

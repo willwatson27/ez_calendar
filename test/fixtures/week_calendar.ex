@@ -70,7 +70,7 @@ defmodule EZCalendar.Fixtures.WeekCalendar do
 
   def html do
     """
-    <table class="ez-calendar">\
+    <table class="ez-calendar week-calendar">\
     <tr class="weekdays">\
     <td>Sunday</td>\
     <td>Monday</td>\
@@ -80,21 +80,23 @@ defmodule EZCalendar.Fixtures.WeekCalendar do
     <td>Friday</td>\
     <td>Saturday</td>\
     </tr>\
-    <td class="today day">\
+    <tr>\
+    <td class="today sunday day">\
     <div class="date">30</div>\
     <div class="data">\
     <div>Date Content</div>\
     <div>Event Content</div>\
     </div>\
     </td>\
-    <td class="day">\
+    <td class="monday day">\
     <div class="date">31</div>\
     <div class="data">\
     <div>Date Content</div>\
-    <div></div>\
+    <div>\
+    </div>\
     </div>\
     </td>\
-    <td class="day">\
+    <td class="tuesday day">\
     <div class="date">1</div>\
     <div class="data">\
     <div>Date Content</div>\
@@ -102,7 +104,7 @@ defmodule EZCalendar.Fixtures.WeekCalendar do
     </div>\
     </div>\
     </td>\
-    <td class="day">\
+    <td class="wednesday day">\
     <div class="date">2</div>\
     <div class="data">\
     <div>Date Content</div>\
@@ -110,7 +112,7 @@ defmodule EZCalendar.Fixtures.WeekCalendar do
     </div>\
     </div>\
     </td>\
-    <td class="day">\
+    <td class="thursday day">\
     <div class="date">3</div>\
     <div class="data">\
     <div>Date Content</div>\
@@ -118,7 +120,7 @@ defmodule EZCalendar.Fixtures.WeekCalendar do
     </div>\
     </div>\
     </td>\
-    <td class="day">\
+    <td class="friday day">\
     <div class="date">4</div>\
     <div class="data">\
     <div>Date Content</div>\
@@ -126,7 +128,7 @@ defmodule EZCalendar.Fixtures.WeekCalendar do
     </div>\
     </div>\
     </td>\
-    <td class="day">\
+    <td class="saturday day">\
     <div class="date">5</div>\
     <div class="data">\
     <div>Date Content</div>\
@@ -134,6 +136,7 @@ defmodule EZCalendar.Fixtures.WeekCalendar do
     </div>\
     </div>\
     </td>\
+    </tr>\
     </table>\
     """    
   end
