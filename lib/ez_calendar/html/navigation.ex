@@ -1,8 +1,21 @@
 defmodule EZCalendar.HTML.Navigation do
+  @moduledoc """
+  HTML helpers to render calendar navigation links
+  """
   use Phoenix.HTML
-
   import String, only: [replace: 3]
 
+  @doc """
+  HTML helper for rendering a calendars next link. 
+  Takes a calendar struct amd a string to format the path from as arguments.
+  The placeholders :day :month and :year will be replaced with the corresponding params.
+
+  "/events/:year/:month/:day"
+
+  "/events?year=:year&month=:month"
+
+  Takes a function or string optional third argument to render something other than the default output.
+  """
   def calendar_next(calendar, path, content \\ nil) do 
     content = content || Application.get_env(:ez_calendar, :default_next, ">")
 
@@ -10,6 +23,9 @@ defmodule EZCalendar.HTML.Navigation do
     |> build_link(content, "calendar-next")
   end
 
+  @doc """
+  The same as `calendar_next` aside from using the calendards `prev` params
+  """
   def calendar_prev(calendar, path, content \\ nil) do
     content = content || Application.get_env(:ez_calendar, :default_prev, "<")
 

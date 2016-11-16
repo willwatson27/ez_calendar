@@ -1,5 +1,5 @@
 defmodule EZCalendar.Fixtures.WeekCalendar do
-  import EZCalendar.Event
+  @moduledoc false
 
   def calendar do
     %EZCalendar.WeekCalendar{

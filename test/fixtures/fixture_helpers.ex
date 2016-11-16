@@ -1,4 +1,5 @@
 defmodule EZCalendar.FixtureHelpers do
+  @moduledoc false
   use Phoenix.HTML
 
   def calendar_html calendar, module do

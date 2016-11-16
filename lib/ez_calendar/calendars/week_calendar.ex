@@ -1,4 +1,5 @@
 defmodule EZCalendar.WeekCalendar do
+  @moduledoc false
   @behaviour EZCalendar.Calendar
 
   import Calendar.Date, only: [to_erl: 1, day_of_week_zb: 1, add!: 2, subtract!: 2]

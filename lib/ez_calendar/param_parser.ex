@@ -1,7 +1,14 @@
 defmodule EZCalendar.ParamParser do
-  
+  @moduledoc false
+
   @doc """
-  Formats the params into an erl representing the date
+  Formats the params into an erl representing the date. 
+  Returns a tuple containing :ok and the erl or :error and the reason.
+
+  Params can be a Date, DateTime, tuple or map containing a day month and year. 
+  Tuple and map values will be cast as integers.
+
+  The day can be ommited from the params, doing so will result in the first of the month being used.
   """
   def to_erl(params) do 
     case build_erl(params) do

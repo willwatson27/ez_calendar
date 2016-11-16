@@ -1,6 +1,14 @@
 defmodule EZCalendar.HTML.CalendarUtil do
+  @moduledoc """
+  Functions used in HTML calendars
+  """
   use Phoenix.HTML
+  
+  @doc """
+  Builds a table row containing day of the week names. 
 
+  Takes a list of strings as an optional argument, defaults to Sunday..Saturday
+  """
   @weekdays ~w[Sunday Monday Tuesday Wednesday Thursday Friday Saturday]
 
   def build_weekdays days \\ @weekdays do
@@ -10,6 +18,12 @@ defmodule EZCalendar.HTML.CalendarUtil do
     end
   end 
 
+
+  @doc """
+  Builds a row of calendar dates taking a list of dates and a function as arguments.
+
+  The function will be called with each date to render its contents.
+  """
   def build_calendar_row dates, func do
     content_tag(:tr) do
       Enum.map(dates, fn(date)-> 

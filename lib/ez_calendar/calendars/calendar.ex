@@ -6,10 +6,29 @@ defmodule EZCalendar.Calendar do
 
   @type date :: String.t
   @type dates :: list
+  @type calendar :: struct
 
-  # Accepts a date erl and returns a 2 item tuple with the start and end date for the calendar. 
+  @doc """
+  Accepts a date erl and returns a 2 item Date type tuple representing the start and end date for the calendar.
+  """  
+  
   @callback date_range(date) :: [tuple]
 
-  # Accepts the calendar dates and the date from the original query and returns a celendar struct.
-  @callback build(dates, date) :: [any]
+  @doc """
+  Accepts the merged calendar dates and the date from the original repo function call params arg.
+
+  Returns a calendar struct should include the following fields: 
+
+  :title - a string defining the date range
+
+  :dates - the list of merged calendar dates
+
+  :params - a param map for the current date period
+
+  :next - a param map for the next date period
+
+  :prev - a param map for the previous date period
+
+  """
+  @callback build(dates, date) :: [calendar]
 end

@@ -11,7 +11,7 @@ This package is [available in Hex](https://hex.pm/packages/ez_calendar).
 Add `ez_calendar` to your `mix.exs` file.
 ```elixir
 def deps do
-  [{:ez_calendar, "~> 0.2.0"}]
+  [{:ez_calendar, "~> 0.1.0"}]
 end
 
 def application do
@@ -45,17 +45,19 @@ Repo.month_calendar(query, {2016, 11})
 
 Month, week and day calendars exist and can be called with their respective functions or by passing the module in as an argument to `Repo.calendar/4`. Additionally, all Repo functions have a bang **!** variant.
 
-Custom calendar modules can be defined, for examples check `lib/calendars`, behaviour is defined in `lib/calendars/calendar.ex`
+Custom calendar modules can be defined, for examples check `lib/ez_calendar/calendars`, behaviour is defined in `lib/ez_calendar/calendars/calendar.ex`
 ```elixir
 Repo.calendar(query, MyApp.PayrollCalendar, params, opts)
 ```
 
 ## Phoenix
 
-Install the stylesheets.
+Install one of the stylesheet formats.
 
 ```
 $ mix ez_calendar.css
+$ mix ez_calendar.scss
+$ mix ez_calendar.sass
 ```
 
 Build a calendar from the params
@@ -96,7 +98,7 @@ Build a calendar using the view helpers
   <% end %> 
 <% end %> 
 ```
-Like the repo functions, there are render functions for each of the built in calendars. You can also use the `calendar/3` function to pass in the HTML module as an arugument.
+Like the repo functions, there are render functions for each of the built in calendars, alternatively you can use the `calendar/3` function to pass in the HTML module as an arugument. Custom HTML modules can be defined too, for examples check `lib/ez_calendar/html/calendars`, behaviour is defined in `lib/ez_calendar/html/calendars/calendar.ex`
 ```eex
 <%= calendar MyApp.PayrollCalendar.HTML, @calendar, fn(date)-> %>
 <% end %>

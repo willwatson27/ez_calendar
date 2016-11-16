@@ -1,4 +1,6 @@
 defmodule EZCalendar.HTML.DayCalendar do
+  @moduledoc false
+  @behaviour EZCalendar.HTML.Calendar
   use Phoenix.HTML
   import EZCalendar.HTML.CalendarUtil, only: [build_calendar_row: 2, build_weekdays: 1]
 

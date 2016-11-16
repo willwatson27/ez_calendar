@@ -1,4 +1,6 @@
 defmodule EZCalendar.CalendarBuilder do
+  @moduledoc false
+  
   import Ecto.Query
   import Calendar.Date, only: [day_of_week_name: 1]
 

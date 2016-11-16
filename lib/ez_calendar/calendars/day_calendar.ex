@@ -1,4 +1,5 @@
 defmodule EZCalendar.DayCalendar do
+  @moduledoc false
   @behaviour EZCalendar.Calendar
 
   import Calendar.Date, only: [add!: 2, subtract!: 2]

@@ -1,4 +1,5 @@
 defmodule EZCalendar.MonthCalendar do
+  @moduledoc false
   @behaviour EZCalendar.Calendar
 
   import Calendar.Date, only: [number_of_days_in_month: 1, day_of_week_zb: 1, add!: 2, subtract!: 2]

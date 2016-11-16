@@ -1,5 +1,6 @@
 defmodule EZCalendar.Fixtures.MonthCalendar do
-
+  @moduledoc false
+  
   def calendar do
     %EZCalendar.MonthCalendar{
       dates: [
