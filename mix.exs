@@ -44,7 +44,10 @@ defmodule EZCalendar.Mixfile do
       {:calendar, "~> 0.16.1"},
 
       {:ex_doc, ">= 0.0.0", only: :dev},
-
+      
+      {:calecto, "~> 0.16.0", only: :test},
+      {:timex, "~> 3.0", only: :test},
+      {:timex_ecto, "~> 3.0", only: :test},
       {:postgrex, "~> 0.12.0", only: :test},
       {:excoveralls, "~> 0.5", only: :test},
     ]

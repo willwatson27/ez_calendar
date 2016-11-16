@@ -2,6 +2,8 @@
 
 Turns Ecto queries into calendar data structures. Includes view helpers for server side rendering in Phoenix. 
 
+Supports TimexEcto and Calecto. 
+
 ## Installation
 
 This package is [available in Hex](https://hex.pm/packages/ez_calendar)
@@ -113,7 +115,7 @@ They will also accept a function or string as an optional third argument
 ```elixir
 config :ez_calendar, 
   default_tz: "UTC",      # default / TZ data format / used to add "today" flag
-  default_field: :date,   # default / date type / schema accessor for building calendar structs
+  default_field: :date,   # default / date/datetime types / schema accessor for building calendar structs
   default_next: ">",      # default text for navigation links
   default_prev: "<",   
 ```
