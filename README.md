@@ -1,8 +1,8 @@
 # EZCalendar
 
-Turns Ecto queries into calendar data structures. Includes view helpers for server side rendering in Phoenix. 
-
-Supports TimexEcto and Calecto. 
+**Turn your Ecto queries into calendar style data structures!**
+ * Includes view helpers for server side rendering in Phoenix. 
+ * Works with Calecto and TimexEcto
 
 ## Installation
 
