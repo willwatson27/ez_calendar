@@ -20,6 +20,13 @@ defmodule EZCalendar.ParamParserTest do
     assert response == :error  
   end
 
+  test "returns an error tuple for missing params" do
+    {response, _} = ParamParser.to_erl(%{day: 10})
+    assert response == :error  
+    {response, _} = ParamParser.to_erl({})
+    assert response == :error  
+  end
+
   test "params can be an erl/tuple" do
     {:ok, date} = ParamParser.to_erl({2016, 11, 1})
     assert date == {2016, 11, 1}       

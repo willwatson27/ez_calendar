@@ -1,0 +1,53 @@
+table.ez_calendar {
+  -webkit-border-horizontal-spacing: 0px;
+  -webkit-border-vertical-spacing: 0px;
+  background-color: rgba(0, 0, 0, 0);
+  border: 1px solid rgb(221, 221, 221);
+  border-collapse: collapse;
+  box-sizing: border-box;
+  max-width: 100%;
+  width: 100%;
+
+  tr {
+    border-collapse: collapse;
+  }
+
+  td {
+    padding: 6px;
+    vertical-align: top;
+    width: 14%;
+    border: 1px solid #ddd;
+  }
+
+  tr.weekdays {} 
+
+  td.today {
+    background: #FFFFC0;
+  }
+
+  td.day {
+    height: 150px;
+
+    .date {
+      color: grey;
+    }
+    .data {}
+  }
+
+  td.sunday {}    
+  td.monday {}    
+  td.tuesday {}  
+  td.wednesday {} 
+  td.thursday {}   
+  td.friday {}    
+  td.saturday {} 
+
+  // month calendar - days not in current month
+  td.trailing {
+    opacity: 0.5;
+  }
+
+}
+// navigation links 
+.calendar-next {}
+.calendar-prev {}

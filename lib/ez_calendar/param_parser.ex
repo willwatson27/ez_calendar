@@ -4,23 +4,39 @@ defmodule EZCalendar.ParamParser do
   Formats the params into an erl representing the date
   """
   def to_erl(params) do 
-    build_erl(params)
-    |> validate_erl
+    case build_erl(params) do
+      {:ok, erl} ->
+        erl
+        |> validate_erl
+      {:error, reason} ->
+        {:error, reason}
+    end
   end
   
   defp build_erl(date) when is_map(date) do
     day = get_value(date, :day, 1)
     month = get_value(date, :month)
     year = get_value(date, :year)
-    build_erl({year, month, day})
+
+    if month && year do
+      build_erl({year, month, day})
+    else
+      {:error, "Invalid params"}
+    end
   end 
 
   defp build_erl({y, m}) do
-    {cast_int(y), cast_int(m), 1}
+    erl = {cast_int(y), cast_int(m), 1}
+    {:ok, erl}
   end
 
   defp build_erl({y, m, d}) do
-    {cast_int(y), cast_int(m), cast_int(d)}
+    erl = {cast_int(y), cast_int(m), cast_int(d)}
+    {:ok, erl}
+  end
+
+  defp build_erl(_) do
+    {:error, "Invalid params"}
   end
 
   defp get_value(date, key, default \\ nil) do
@@ -32,11 +48,12 @@ defmodule EZCalendar.ParamParser do
 
   defp cast_int(i) when is_integer(i), do: i
   defp cast_int(i) when is_binary(i), do: String.to_integer(i)
+  defp cast_int(_), do: nil
 
   defp validate_erl(erl) do
     case Date.from_erl(erl) do
       {:ok, _} -> {:ok, erl}
-      {:error, _} -> {:error, "Invalid date."}
+      {:error, _} -> {:error, "Invalid params"}
     end
   end
 

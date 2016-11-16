@@ -1,16 +1,17 @@
 # EZCalendar
 
 **Turn your Ecto queries into calendar style data structures!**
- * Includes view helpers for server side rendering in Phoenix. 
+ * Includes view helpers for server side rendering in Phoenix
  * Works with Calecto and TimexEcto
 
 ## Installation
 
-This package is [available in Hex](https://hex.pm/packages/ez_calendar)
-Add `ez_calendar` to your `mix.exs` file
+This package is [available in Hex](https://hex.pm/packages/ez_calendar).
+
+Add `ez_calendar` to your `mix.exs` file.
 ```elixir
 def deps do
-  [{:ez_calendar, "~> 0.1.0"}]
+  [{:ez_calendar, "~> 0.2.0"}]
 end
 
 def application do

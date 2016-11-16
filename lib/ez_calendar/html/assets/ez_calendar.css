@@ -13,35 +13,12 @@ table.ez-calendar {
   border-collapse: collapse;
 }
 
-.ez-calendar th {
-  padding: 6px;
-  border-bottom: 2px solid rgb(221, 221, 221);
-  border-collapse: collapse;
-  border-left: 1px solid rgb(221, 221, 221);
-  border-right: 1px solid rgb(221, 221, 221);
-  border-top: 0px none rgb(51, 51, 51);
-  box-sizing: border-box;
-  text-align: left;
-}
 
 .ez-calendar td {
   padding: 6px;
   vertical-align: top;
   width: 14%;
-
   border: 1px solid #ddd;
-  border-top-color: rgb(221, 221, 221);
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-right-color: rgb(221, 221, 221);
-  border-right-style: solid;
-  border-right-width: 1px;
-  border-bottom-color: rgb(221, 221, 221);
-  border-bottom-style: solid;
-  border-bottom-width: 1px;
-  border-left-color: rgb(221, 221, 221);
-  border-left-style: solid;
-  border-left-width: 1px;
 }
 
 .ez-calendar tr.weekdays {} 
