@@ -41,4 +41,12 @@ defmodule EZCalendar.HTMLTest do
     {result, _} = html
     assert result == :safe
   end
+ 
+  test "builds html for a biweekly calendar" do
+    calendar = build_calendar(EZCalendar.BiweeklyCalendar)
+    html = HTML.biweekly_calendar(calendar, fn(_)-> " " end)
+
+    {result, _} = html
+    assert result == :safe
+  end
 end

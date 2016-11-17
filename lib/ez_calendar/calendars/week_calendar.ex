@@ -8,7 +8,7 @@ defmodule EZCalendar.WeekCalendar do
   alias EZCalendar.WeekCalendar
   defstruct [:title, :dates, :next, :prev, :params]
 
-  def date_range(date) do
+  def date_range(date, _opts) do
     week_range(date)
   end
 
@@ -36,8 +36,8 @@ defmodule EZCalendar.WeekCalendar do
 
   defp title date do
     {start_date, end_date} = week_range(date)
-    start_date = start_date |> to_erl |> Calendar.Date.from_erl! |> Calendar.Strftime.strftime!("%d %b %Y")
-    end_date = end_date |> to_erl |> Calendar.Date.from_erl! |> Calendar.Strftime.strftime!("%d %b %Y" ) 
+    start_date = start_date |> Calendar.Strftime.strftime!("%d %b %Y")
+    end_date = end_date |> Calendar.Strftime.strftime!("%d %b %Y" ) 
     start_date <> " - " <> end_date   
   end
 end

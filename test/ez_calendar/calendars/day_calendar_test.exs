@@ -9,7 +9,7 @@ defmodule EZCalendar.DayCalendarTest do
   end
  
   test "returns the correct date range" do
-    {start_date, end_date} = DayCalendar.date_range({2016, 11, 1})
+    {start_date, end_date} = DayCalendar.date_range({2016, 11, 1}, [])
 
     assert start_date == ~D[2016-11-01]
     assert end_date == ~D[2016-11-01]

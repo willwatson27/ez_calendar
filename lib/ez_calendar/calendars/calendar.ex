@@ -7,12 +7,14 @@ defmodule EZCalendar.Calendar do
   @type date :: String.t
   @type dates :: list
   @type calendar :: struct
+  @type opts :: list
 
   @doc """
-  Accepts a date erl and returns a 2 item Date type tuple representing the start and end date for the calendar.
+  Returns a 2 item Date type tuple representing the start and end date for the calendar.
+  Accepts a date erl and the options
   """  
   
-  @callback date_range(date) :: [tuple]
+  @callback date_range(date, opts) :: [tuple]
 
   @doc """
   Accepts the merged calendar dates and the date from the original repo function call params arg.

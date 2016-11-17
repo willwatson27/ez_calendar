@@ -8,7 +8,7 @@ defmodule EZCalendar.MonthCalendar do
   alias EZCalendar.MonthCalendar
   defstruct [:title, :dates, :next, :prev, :params]
 
-  def date_range date do
+  def date_range date, _opts do
     date = month_first(date)
     weeks = (number_of_days_in_month(date) + day_of_week_zb(date)) / 7 |> Float.ceil |> round
     start_date = subtract!(date, day_of_week_zb(date))

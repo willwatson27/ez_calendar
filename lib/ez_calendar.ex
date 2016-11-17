@@ -34,6 +34,13 @@ defmodule EZCalendar do
       def day_calendar!(query, date, opts \\ []) do
         EZCalendar.build!(EZCalendar.DayCalendar, __MODULE__, query, date, opts)
       end
+
+      def biweekly_calendar(query, date, opts \\ []) do
+        EZCalendar.build(EZCalendar.BiweeklyCalendar, __MODULE__, query, date, opts)
+      end
+      def biweekly_calendar!(query, date, opts \\ []) do
+        EZCalendar.build!(EZCalendar.BiweeklyCalendar, __MODULE__, query, date, opts)
+      end
       
     end
   end
@@ -65,7 +72,7 @@ defmodule EZCalendar do
   end 
 
   defp build_calendar(calendar, repo, query, date, opts) do
-    {start_date, end_date} = calendar.date_range(date)
+    {start_date, end_date} = calendar.date_range(date, opts)
     EZCalendar.CalendarBuilder.build(query, repo, start_date, end_date, opts) 
     |> calendar.build(date)
   end

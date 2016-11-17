@@ -31,7 +31,7 @@ end
 Turn your queries into calendar structs 
 ```elixir
 def calendar date \\ DateTime.utc_now do
-  Shift
+  MyApp.Shift
   |> with_employee
   |> Repo.month_calendar(date)
 end
@@ -41,9 +41,10 @@ Repo functions accept an ecto query as the first argument and a Date, DateTime, 
 Repo.day_calendar(query, %{day: 1, month: 11, year: 2016})
 Repo.week_calendar(query, {2016, 11, 27})
 Repo.month_calendar(query, {2016, 11})
+Repo.biweekly_calendar(query, {2016, 11, 3})
 ```
 
-Month, week and day calendars exist and can be called with their respective functions or by passing the module in as an argument to `Repo.calendar/4`. Additionally, all Repo functions have a bang **!** variant.
+Month, week, day and biweekly calendars exist and can be called with their respective functions or by passing the module in as an argument to `Repo.calendar/4`. Additionally, all Repo functions have a bang **!** variant.
 
 Custom calendar modules can be defined, for examples check `lib/ez_calendar/calendars`, behaviour is defined in `lib/ez_calendar/calendars/calendar.ex`
 ```elixir
@@ -63,12 +64,12 @@ $ mix ez_calendar.sass
 Build a calendar from the params
 ```elixir
 def index(conn, params) do
-  case Repo.month_calendar(Shift, params) do
+  case Repo.month_calendar(MyApp.Shift, params) do
     {:ok, calendar} ->
       render(conn, "index.html", calendar: calendar)
 
     {:error, reason} ->
-      calendar = Repo.month_calendar!(Shift, DateTime.utc_now)
+      calendar = Repo.month_calendar!(MyApp.Shift, DateTime.utc_now)
 
       conn
       |> put_flash(:error, reason)
@@ -117,14 +118,30 @@ They will also accept a function or string as an optional third argument
 ## Configuration
 ```elixir
 config :ez_calendar, 
-  default_tz: "UTC",      # default / TZ data format / used to add "today" flag
-  default_field: :date,   # default / date/datetime types / schema accessor for building calendar structs
-  default_next: ">",      # default text for navigation links
+  # schema field name for building calendar structs
+  # defaults to :date
+  # field types can be date or datetime data types
+  default_field: :posted_on, 
+  
+  # TZ data format # used to add "today" flag
+  default_tz: "UTC", 
+  
+  # text for navigation links
+  default_next: ">",      
   default_prev: "<",   
+  
+  # erl type # used to build biweekly date ranges
+  default_biweekly_start: {2016, 1, 3} 
 ```
-The field and timezone can also be changed on a per query basis
+The field, timezone and biweekly_start date can also be changed on a per query basis
 ```elixir
-Repo.month_calendar(query, date, field: :posted_on, tz: "America/Vancouver")
+Repo.biweekly_calendar(
+  MyApp.Shift, 
+  DateTime.utc_now, 
+  field: :shift_date, 
+  tz: "America/Vancouver", 
+  biweekly_start: {2016, 1, 4}
+)
 ```
 
 ## Contributing

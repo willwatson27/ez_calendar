@@ -9,7 +9,7 @@ defmodule EZCalendar.MonthCalendarTest do
   end
 
   test "returns the correct date range" do
-    {start_date, end_date} = MonthCalendar.date_range({2016, 11, 1})
+    {start_date, end_date} = MonthCalendar.date_range({2016, 11, 1}, [])
 
     assert start_date == ~D[2016-10-30]
     assert end_date == ~D[2016-12-03]

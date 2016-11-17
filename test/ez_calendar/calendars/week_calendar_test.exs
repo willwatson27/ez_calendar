@@ -9,7 +9,7 @@ defmodule EZCalendar.WeekCalendarTest do
   end
  
   test "returns the correct date range" do
-    {start_date, end_date} = WeekCalendar.date_range({2016, 11, 1})
+    {start_date, end_date} = WeekCalendar.date_range({2016, 11, 1}, [])
 
     assert start_date == ~D[2016-10-30]
     assert end_date == ~D[2016-11-05]

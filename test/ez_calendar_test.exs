@@ -2,7 +2,7 @@ defmodule EZCalendarTest do
   use ExUnit.Case, async: true
   alias EZCalendar.Repo
   alias EZCalendar.Event
-  alias EZCalendar.{MonthCalendar, WeekCalendar, DayCalendar}
+  alias EZCalendar.{MonthCalendar, WeekCalendar, DayCalendar, BiweeklyCalendar}
   doctest EZCalendar
 
   setup do
@@ -36,6 +36,14 @@ defmodule EZCalendarTest do
 
     calendar = Event |> Repo.day_calendar!({2016, 11, 1})
     assert calendar.__struct__ == DayCalendar
+  end
+
+  test "returns a biweekly calendar" do
+    {:ok, calendar} = Event |> Repo.biweekly_calendar({2016, 11, 1})
+    assert calendar.__struct__ == BiweeklyCalendar
+
+    calendar = Event |> Repo.biweekly_calendar!({2016, 11, 1})
+    assert calendar.__struct__ == BiweeklyCalendar
   end
 
   test "returns a calendar for a given module" do

@@ -1,7 +1,9 @@
 defmodule Mix.Tasks.EzCalendar.StylesheetInstaller do
-  @moduledoc """
-  Functions for installing different stylesheets types.
-  """
+  @moduledoc false
+
+  ###
+  # USED TO INSTALL THE DIFFERENT STYLESHEET TYPES
+  ###
 
   def install(ext) do
     check_directory

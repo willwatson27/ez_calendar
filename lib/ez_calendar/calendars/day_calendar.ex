@@ -8,7 +8,7 @@ defmodule EZCalendar.DayCalendar do
   alias EZCalendar.DayCalendar
   defstruct [:title, :dates, :next, :prev, :params, :weekday]
 
-  def date_range(date) do
+  def date_range date, _opts do
     date = date |> Date.from_erl!
     {date, date} 
   end 
