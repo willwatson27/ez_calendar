@@ -1,6 +1,6 @@
 defmodule EZCalendar.CalendarBuilderTest do
   use ExUnit.Case
-  alias EZCalendar.{CalendarBuilder, Repo, Event, TimexEvent, CalectoEvent}
+  alias EZCalendar.{CalendarBuilder, Repo, Shift, Event, TimexEvent, CalectoEvent}
 
   setup do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(EZCalendar.Repo)
@@ -124,6 +124,51 @@ defmodule EZCalendar.CalendarBuilderTest do
     |> calendar_data
 
     assert event.title == "Calecto DateTime"
+  end
+
+  test "can accept a keyword list of queries" do
+    %Event{ title: "Posted", date: ~D[2016-11-01] |> Ecto.Date.cast! } |> Repo.insert!
+    %Shift{ employee: "Name", date: ~D[2016-11-01] |> Ecto.Date.cast! } |> Repo.insert!
+    
+    dates = [
+      events: [Event, :date],
+      shifts: [Shift, :date]
+    ]
+    |> build_dates(~D[2016-11-01], ~D[2016-11-01])
+    
+    data = dates |> List.first |> Map.get(:data)
+    
+    event = data.events |> List.first
+    shift = data.shifts |> List.first
+
+    assert event.__struct__ == Event
+    assert shift.__struct__ == Shift
+  end
+
+  test "can accept a tuple for the field name to use as a range" do
+    %Shift{starting: ecto_datetime({2016, 11, 01}), ending: ecto_datetime({2016, 11, 02}) } |> Repo.insert!
+    
+    ###
+
+    dates = [
+      shifts: [Shift, {:starting, :ending}]
+    ]
+    |> build_dates(~D[2016-11-01], ~D[2016-11-02])
+
+    data1 = dates |> List.first |> Map.get(:data) |> Map.get(:shifts) |> List.first |> Map.get(:__struct__)
+    assert data1 == Shift
+    data2 = dates |> List.last |> Map.get(:data) |> Map.get(:shifts) |> List.first |> Map.get(:__struct__)
+    assert data2 == Shift
+
+    ###
+
+    dates = build_dates(Shift, ~D[2016-11-01], ~D[2016-11-02], field: {:starting, :ending})
+
+    data1 = dates |> List.first |> Map.get(:data) |> List.first |> Map.get(:__struct__)
+    assert data1 == Shift
+    data2 = dates |> List.last |> Map.get(:data) |> List.first |> Map.get(:__struct__)
+    assert data2 == Shift
+
   end
 
 end
