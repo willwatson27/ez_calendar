@@ -148,26 +148,34 @@ defmodule EZCalendar.CalendarBuilderTest do
   test "can accept a tuple for the field name to use as a range" do
     %Shift{starting: ecto_datetime({2016, 11, 01}), ending: ecto_datetime({2016, 11, 02}) } |> Repo.insert!
     
-    ###
+    ### Multi Query
 
     dates = [
       shifts: [Shift, {:starting, :ending}]
     ]
-    |> build_dates(~D[2016-11-01], ~D[2016-11-02])
+    |> build_dates(~D[2016-10-31], ~D[2016-11-03])
 
-    data1 = dates |> List.first |> Map.get(:data) |> Map.get(:shifts) |> List.first |> Map.get(:__struct__)
-    assert data1 == Shift
-    data2 = dates |> List.last |> Map.get(:data) |> Map.get(:shifts) |> List.first |> Map.get(:__struct__)
-    assert data2 == Shift
+    day1 = dates |> Enum.at(0) |> Map.get(:data) |> Map.get(:shifts)
+    assert day1 == []
+    day2 = dates |> Enum.at(1) |> Map.get(:data) |> Map.get(:shifts) |> List.first |> Map.get(:__struct__)
+    assert day2 == Shift
+    day3 = dates |> Enum.at(2) |> Map.get(:data) |> Map.get(:shifts) |> List.first |> Map.get(:__struct__)
+    assert day3 == Shift
+    day4 = dates |> Enum.at(3) |> Map.get(:data) |> Map.get(:shifts)
+    assert day4 == []
+    
+    ### Single Query
 
-    ###
+    dates = build_dates(Shift, ~D[2016-10-31], ~D[2016-11-03], field: {:starting, :ending})
 
-    dates = build_dates(Shift, ~D[2016-11-01], ~D[2016-11-02], field: {:starting, :ending})
-
-    data1 = dates |> List.first |> Map.get(:data) |> List.first |> Map.get(:__struct__)
-    assert data1 == Shift
-    data2 = dates |> List.last |> Map.get(:data) |> List.first |> Map.get(:__struct__)
-    assert data2 == Shift
+    day1 = dates |> Enum.at(0) |> Map.get(:data)
+    assert day1 == []
+    day2 = dates |> Enum.at(1) |> Map.get(:data) |> List.first |> Map.get(:__struct__)
+    assert day2 == Shift
+    day3 = dates |> Enum.at(2) |> Map.get(:data) |> List.first |> Map.get(:__struct__)
+    assert day3 == Shift
+    day4 = dates |> Enum.at(3) |> Map.get(:data)
+    assert day4 == []
 
   end
 

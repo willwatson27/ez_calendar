@@ -1,12 +1,11 @@
 defmodule EZCalendar.QueryRunner do
   import Ecto.Query
-
-  defmodule QueryParams do
-    defstruct [:key, :query, :repo, :starting, :ending, :field, :results]
-  end
   
-  def run(queries, repo, starting, ending, _opts) when is_list(queries) do
-    build_multi_query(queries, repo, starting, ending)
+  alias EZCalendar.QueryRunner
+  defstruct [:key, :query, :repo, :starting, :ending, :field, :results]
+
+  def run(queries, repo, starting, ending, opts) when is_list(queries) do
+    build_multi_query(queries, repo, starting, ending, opts)
     |> fetch_results
   end 
 
@@ -16,9 +15,9 @@ defmodule EZCalendar.QueryRunner do
   end
 
   defp build_query query, repo, starting, ending, opts do
-    field = opts[:field] || Application.get_env(:ez_calendar, :default_field, :date)
+    field = get_field(opts)
 
-    %QueryParams{
+    %QueryRunner{
       query: query,
       repo: repo,
       starting: starting,
@@ -27,10 +26,20 @@ defmodule EZCalendar.QueryRunner do
     } 
   end
 
-  defp build_multi_query queries, repo, starting, ending do
+  defp build_multi_query queries, repo, starting, ending, opts do
     queries
-    |> Enum.map(fn({key, [query, field]})->
-      %QueryParams{
+    |> Enum.map(fn({key, query})->
+      # use default field if not given
+      {query, field} =
+      case to_tuple(query) do
+        {q, field} -> 
+          {q, field}
+        q -> 
+          field = get_field(opts)
+          {q, field}
+      end
+      # build query
+      %QueryRunner{
         key: key,
         query: query,
         repo: repo,
@@ -39,6 +48,11 @@ defmodule EZCalendar.QueryRunner do
         field: field,
       }
     end)
+  end
+
+
+  defp get_field(opts) do
+    opts[:field] || Application.get_env(:ez_calendar, :default_field, :date)
   end
 
   ###
@@ -62,7 +76,7 @@ defmodule EZCalendar.QueryRunner do
   end
 
   defp do_query_results params, starting, ending do
-     case params.field do
+     case to_tuple(params.field)do
       {_, _} -> params |> range_query_results(starting, ending)
       _  -> params |> query_results(starting, ending)
     end   
@@ -77,7 +91,7 @@ defmodule EZCalendar.QueryRunner do
   end
 
   defp range_query_results params, starting, ending do
-    {starting_field, ending_field} = params.field
+    {starting_field, ending_field} = to_tuple(params.field)
 
     from( q in params.query,
       where: (field(q, ^starting_field) >= ^starting 
@@ -88,4 +102,6 @@ defmodule EZCalendar.QueryRunner do
     |> params.repo.all
   end
 
+  defp to_tuple(list) when is_list(list),  do: List.to_tuple(list)
+  defp to_tuple(list), do: list
 end
