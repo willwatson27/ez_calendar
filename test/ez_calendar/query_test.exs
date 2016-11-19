@@ -1,13 +1,13 @@
-defmodule EZCalendar.QueryRunnerTest do
+defmodule EZCalendar.QueryTest do
   use ExUnit.Case
-  alias EZCalendar.{QueryRunner, Repo, Shift, Event}
+  alias EZCalendar.{Query, Repo, Shift, Event}
 
   setup do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(EZCalendar.Repo)
   end
 
   defp run query, start_date, end_date, opts \\ [] do
-    QueryRunner.run(query, Repo, start_date, end_date, opts)
+    Query.run(query, Repo, start_date, end_date, opts)
   end
 
   defp ecto_datetime({year, month, day}) do

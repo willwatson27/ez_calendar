@@ -1,4 +1,5 @@
 defmodule EZCalendar.DateFilter do
+  @moduledoc false
 
   import Calendar.Date, only: [before?: 2, after?: 2, same_date?: 2]
 

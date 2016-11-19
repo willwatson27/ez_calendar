@@ -2,7 +2,7 @@
 
 **Turn your Ecto queries into calendar style data structures!**
  * Includes view helpers for server side rendering in Phoenix
- * Works with Calecto and TimexEcto
+ * Tested with Ecto, Calecto and TimexEcto
 
 ## Installation
 
@@ -27,56 +27,85 @@ defmodule MyApp.Repo do
 end
 ```
 
-## Basic Usage
-Turn your queries into calendar structs 
+## Usage
+Turn your queries into calendar structs
 ```elixir
-def calendar date \\ DateTime.utc_now do
+def calendar(params \\ DateTime.utc_now) do
   MyApp.Shift
   |> with_employee
-  |> MyApp.Repo.month_calendar(date)
+  |> MyApp.Repo.month_calendar(params)
 end
 ```
-Repo functions accept an ecto query as the first argument and a Date, DateTime, erl, tuple `{year, month, day}` or map as the second. The day can be ommited on month calendars, doing so with others will result in the 1st of the month being used.
+Month, week, day and biweekly calendars exist and can be called with their respective functions or by passing the module in as an argument to `Repo.calendar/4`. 
+All Repo functions have a bang**!** variant that will raise an error rather than returning a tuple.
+
+The params can be a Date, DateTime, erl style tuple or map containing the keys `day` `month` and `year`. 
+The day can be ommited from the params, doing so will result in the first of the month being used.
+Tuple and map values will be cast as integers for easy integration with phoenix.
+
 ```elixir
 Repo.day_calendar(query, %{day: 1, month: 11, year: 2016})
 Repo.week_calendar(query, {2016, 11, 27})
 Repo.month_calendar(query, {2016, 11})
 Repo.biweekly_calendar(query, {2016, 11, 3})
+# Custom calendar modules can be defined.
+Repo.calendar(query, MyApp.PayrollCalendar, params)
+# Examples  lib/ez_calendar/calendars/
+# Behaviour lib/ez_calendar/calendars/calendar.ex
 ```
+The timezone and query field can be set with `:tz` and `:field` as options. 
+If using a biweekly calendar the `biweekly_start` can also be set.
+Default values for the options can be set in the config.
 
-Month, week, day and biweekly calendars exist and can be called with their respective functions or by passing the module in as an argument to `Repo.calendar/4`. Additionally, all Repo functions have a bang **!** variant.
-
-Custom calendar modules can be defined, for examples check `lib/ez_calendar/calendars`, behaviour is defined in `lib/ez_calendar/calendars/calendar.ex`
 ```elixir
-Repo.calendar(query, MyApp.PayrollCalendar, params, opts)
+Repo.biweekly_calendar(
+  query, 
+  params, 
+  field: [:starting, :ending], 
+  tz: "America/Vancouver", 
+  biweekly_start: {2016, 1, 4}
+)
+
 ```
-### Multiple Queries
-You also can build a keyword list of queries.
+The `field` option represents field name in your schema used to build the calendars.
+It can be a single field, or 2 item list or tuple representing a start/end range. 
+Date or DateTime types are valid, if using a range the types must match.
+
+The timezone defaults to `UTC` and must a be valid TZ data format. It's used to appropriately set each dates `today?` boolean flag. 
+
+The `biweekly_start` must be an erl equal to the first day in any of two week periods you want the calendar to represent. 
+Can start on any day of the week. 
+## Multiple Queries
+You can use a keyword list for the query. Each query will use the default field(s) unless provided in the query list or in the options.
 ```elixir
 [
   shifts: [Shift, [:starting, :ending]],
   events: [Event, :starting_at],
   meetings: Meeting,
-  deliveries: Devlivery
+  deliveries: Delivery
 ]
-|> Repo.day_calendar({2016, 11, 1}, field: :scheduled_for)
+|> Repo.month_calendar({2016, 11}, field: :scheduled_for)
 ```
 
-You will be able to access your query results by key in each dates data field:
+Query results will be accessible by their key in each dates data field:
 ```elixir
-%{
-  data: %{
-    shifts: [%Shift{}, %Shift{}],
-    events: [%Event{}],
-    meetings: [],
-    deliveries: [%Devlivery{}]
+[
+  # ...
+  %{
+    data: %{
+      shifts: [%Shift{}, %Shift{}],
+      events: [%Event{}],
+      meetings: [],
+      deliveries: [%Delivery{}]
+    },
+    day: 18, 
+    month: 11, 
+    today?: true, 
+    weekday: "Friday", 
+    year: 2016
   },
-  day: 1, 
-  month: 11, 
-  today?: false, 
-  weekday: "Tuesday", 
-  year: 2016
-}
+  # ...
+]
 ```
 ## Phoenix
 
@@ -91,12 +120,12 @@ $ mix ez_calendar.sass
 Build a calendar from the params
 ```elixir
 def index(conn, params) do
-  case Repo.month_calendar(MyApp.Shift, params) do
+  case MyApp.Repo.month_calendar(MyApp.Shift, params) do
     {:ok, calendar} ->
       render(conn, "index.html", calendar: calendar)
 
     {:error, reason} ->
-      calendar = Repo.month_calendar!(MyApp.Shift, DateTime.utc_now)
+      calendar = MyApp.Repo.month_calendar!(MyApp.Shift, DateTime.utc_now)
 
       conn
       |> put_flash(:error, reason)
@@ -126,50 +155,40 @@ Build a calendar using the view helpers
   <% end %> 
 <% end %> 
 ```
-Like the repo functions, there are render functions for each of the built in calendars, alternatively you can use the `calendar/3` function to pass in the HTML module as an arugument. Custom HTML modules can be defined too, for examples check `lib/ez_calendar/html/calendars`, behaviour defined in `lib/ez_calendar/html/calendars/calendar.ex`
+Like the repo functions, there are render functions for each of the built in calendars, 
+you can also use the `calendar/3` function to pass in the HTML module as an arugument.
 ```eex
 <%= calendar MyApp.PayrollCalendar.HTML, @calendar, fn(date)-> %>
 <% end %>
+# Custom HTML modules can be defined.
+# Examples  lib/ez_calendar/html/calendars/
+# Behaviour lib/ez_calendar/html/calendars/calendar.ex
 ```
+The `calendar_next` and `calendar_prev` functions accept the 
+calendar struct and a string showing how to format the path. 
+The correct parameters will replace the `:day`, `:month` and `:year` placeholders.
 
-The next and previous functions accept the calendar and a string showing how to format the path. The correct parameters will replace :day, :month and :year. 
-They will also accept a function or string as an optional third argument
+The links contents can also be passed in as an optional third argument.
 ```eex
-<%= calendar_prev @calendar, "/shifts/:year/:month", "Previous" %>
+
+<%= calendar_next @calendar, "/shifts/:year/:month/:day", "Next" %>
 
 <%= calendar_next @calendar, "/shifts/:year/:month", fn()-> %>
   <!-- link content -->
 <% end %>
+
+<%= calendar_next @calendar, "/shifts?year=:year&month=:month", "Next" %>
 ```
 
 ## Configuration
+The following values are the defaults.
 ```elixir
 config :ez_calendar, 
-  # schema field name(s) for building calendar structs
-  # can be a single field or a start and end tuple/list
-  # fields can be date or datetime types
-  # defaults to :date
-  default_field: [:starting, :ending], 
-  
-  # TZ data format # used to add "today" flag
+  default_field: :date, 
   default_tz: "UTC", 
-  
-  # text for navigation links
   default_next: ">",      
   default_prev: "<",   
-  
-  # erl type # used to build biweekly date ranges
   default_biweekly_start: {2016, 1, 3} 
-```
-The field, timezone and biweekly_start date can also be changed on a per query basis
-```elixir
-Repo.biweekly_calendar(
-  MyApp.Shift, 
-  DateTime.utc_now, 
-  field: {:starting, :ending}, 
-  tz: "America/Vancouver", 
-  biweekly_start: {2016, 1, 4}
-)
 ```
 
 ## Contributing

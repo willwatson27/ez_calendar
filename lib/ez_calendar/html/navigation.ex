@@ -1,20 +1,37 @@
 defmodule EZCalendar.HTML.Navigation do
   @moduledoc """
-  HTML helpers to render calendar navigation links
+  Functions to render calendar navigation links.
+
+  For easy access to all the render functions
+  add `EZCalendar.HTML` to your view.
+
+      defmodule MyApp.ShiftView do
+        use MyApp.Web, :view
+        import EZCalendar.HTML
+      end
+      
+  If you only want the navigation links you can import `EZCalendar.HTML.Navigation` instead.
   """
   use Phoenix.HTML
   import String, only: [replace: 3]
 
   @doc """
-  HTML helper for rendering a calendars next link. 
-  Takes a calendar struct amd a string to format the path from as arguments.
-  The placeholders :day :month and :year will be replaced with the corresponding params.
+  Renders a HTML link for the next calendar.
 
-  "/events/:year/:month/:day"
+  Takes a calendar struct and a string to format the path from as arguments.
+  
+  Placeholders `:day`, `:month` and `:year` will be replaced with the corresponding params.
 
-  "/events?year=:year&month=:month"
+      <%= calendar_next @calendar, "/events/:year/:month/:day" %>
 
-  Takes a function or string optional third argument to render something other than the default output.
+      <%= calendar_next @calendar, "/events?year=:year&month=:month" %>
+  
+  Takes a string or function as an optional third arugment.
+      <%= calendar_next @calendar, "/events/:year/:month", "Next" %>
+
+      <%= calendar_next @calendar, "/events/:year/:month", fn()-> %>
+        Next
+      <% end %>
   """
   def calendar_next(calendar, path, content \\ nil) do 
     content = content || Application.get_env(:ez_calendar, :default_next, ">")
@@ -24,7 +41,9 @@ defmodule EZCalendar.HTML.Navigation do
   end
 
   @doc """
-  The same as `calendar_next` aside from using the calendards `prev` params
+  Renders a HTML link for the previous calendar.
+
+  Used the same as `calendar_next/3`
   """
   def calendar_prev(calendar, path, content \\ nil) do
     content = content || Application.get_env(:ez_calendar, :default_prev, "<")

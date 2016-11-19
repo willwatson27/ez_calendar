@@ -1,6 +1,8 @@
 defmodule EZCalendar.HTML.CalendarUtil do
   @moduledoc """
-  Functions used in HTML calendars
+  Helper functions used in the HTML calendars. 
+  
+  Can be useful for creating custom calendars
   """
   use Phoenix.HTML
   
@@ -20,9 +22,10 @@ defmodule EZCalendar.HTML.CalendarUtil do
 
 
   @doc """
-  Builds a row of calendar dates taking a list of dates and a function as arguments.
+  Builds a row of calendar dates with the appropriate css classes.
 
-  The function will be called with each date to render its contents.
+  It accepts a list of dates and a function that will 
+  be called with each date to render its contents.
   """
   def build_calendar_row dates, func do
     content_tag(:tr) do

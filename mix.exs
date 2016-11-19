@@ -2,18 +2,33 @@ defmodule EZCalendar.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :ez_calendar,
-     version: "0.1.4",
-     elixir: "~> 1.3",
-     elixirc_paths: path(Mix.env),
-     build_embedded: Mix.env == :prod,
-     start_permanent: Mix.env == :prod,
-     test_coverage: [tool: ExCoveralls],
-     preferred_cli_env: ["coveralls": :test, "coveralls.detail": :test, "coveralls.post": :test, "coveralls.html": :test],
-    
-     package: package,
-     description: "A library for building calendars in ecto and phoenix",
-     deps: deps()]
+    [
+      app: :ez_calendar,
+      version: "0.1.5",
+      elixir: "~> 1.3",
+      elixirc_paths: path(Mix.env),
+      build_embedded: Mix.env == :prod,
+      start_permanent: Mix.env == :prod,
+      deps: deps(),
+
+      # Coverails
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: ["coveralls": :test, "coveralls.detail": :test, "coveralls.post": :test, "coveralls.html": :test],
+     
+      # ExDoc
+      name: "EZCalendar",
+      source_url: "https://github.com/willwatson27/ez_calendar",
+      homepage_url: "https://github.com/willwatson27/ez_calendar",
+      docs: [
+        main: "readme", # The main page in the docs
+        # logo: "path/to/logo.png",
+        extras: ["README.md"]
+      ],
+      
+      # HEX
+      package: package,
+      description: "Build calendars from ecto queries, includes view helpers for easy rendering with Phoenix",
+    ]
   end
 
   def package do

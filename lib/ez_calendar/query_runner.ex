@@ -1,7 +1,9 @@
-defmodule EZCalendar.QueryRunner do
+defmodule EZCalendar.Query do
+  @moduledoc false
+  
   import Ecto.Query
   
-  alias EZCalendar.QueryRunner
+  alias EZCalendar.Query
   defstruct [:key, :query, :repo, :starting, :ending, :field, :results]
 
   def run(queries, repo, starting, ending, opts) when is_list(queries) do
@@ -17,7 +19,7 @@ defmodule EZCalendar.QueryRunner do
   defp build_query query, repo, starting, ending, opts do
     field = get_field(opts)
 
-    %QueryRunner{
+    %Query{
       query: query,
       repo: repo,
       starting: starting,
@@ -39,7 +41,7 @@ defmodule EZCalendar.QueryRunner do
           {q, field}
       end
       # build query
-      %QueryRunner{
+      %Query{
         key: key,
         query: query,
         repo: repo,

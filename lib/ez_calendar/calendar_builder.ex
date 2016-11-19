@@ -1,7 +1,7 @@
 defmodule EZCalendar.CalendarBuilder do
   @moduledoc false
   
-  alias EZCalendar.{DateFilter, QueryRunner}
+  alias EZCalendar.{DateFilter, Query}
 
   import Enum, only: [map: 2, to_list: 1, into: 2]
 
@@ -9,7 +9,7 @@ defmodule EZCalendar.CalendarBuilder do
     day_of_week_name: 1, to_erl: 1, same_date?: 2, days_after_until: 3 ]
 
   def build query, repo, start_date, end_date, opts do
-    queries = QueryRunner.run(query, repo, start_date, end_date, opts)
+    queries = Query.run(query, repo, start_date, end_date, opts)
     
     erl_date_list(start_date, end_date)
     |> map(fn(date)-> 
