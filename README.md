@@ -156,9 +156,9 @@ Render the calendar with the view helpers.
 <% end %> 
 ```
 If you want to use an html module that is not the default for that calendar,
-you can also use the `render_calendar/3` function to pass in the module as the first arugument.
+you can use the `render_calendar/3` function to pass in the module as the first arugument.
 ```eex
-<%= render_calendar MyApp.MonthCalendarHTML, @calendar, fn(date)-> %>
+<%= render_calendar MyApp.CustomMonthCalendar, @calendar, fn(date)-> %>
 <% end %>
 # Custom HTML modules can be defined.
 # Examples  lib/ez_calendar/html/calendars/
