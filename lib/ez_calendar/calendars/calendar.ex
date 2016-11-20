@@ -6,8 +6,18 @@ defmodule EZCalendar.Calendar do
 
   @type date :: String.t
   @type dates :: list
-  @type calendar :: struct
   @type opts :: list
+  @type calendar :: struct
+
+  @doc """
+  Returns the default HTML module that will render the calendar.
+  
+  If not using the HTML features do not worry about what this returns.
+  
+  Takes no arguments.
+  """
+
+  @callback html_module() :: [module()]
 
   @doc """
   The first argument is a date erl parsed from the params.

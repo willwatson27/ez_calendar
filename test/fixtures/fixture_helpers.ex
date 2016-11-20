@@ -1,10 +1,10 @@
-defmodule EZCalendar.FixtureHelpers do
+defmodule EZCalendar.Fixtures.Helpers do
   @moduledoc false
   use Phoenix.HTML
 
-  def calendar_html calendar, module do
-    calendar
-    |> module.build(fn(date)->
+  def calendar_html module do
+    module.calendar
+    |> EZCalendar.HTML.render_calendar(fn(date)->
       [
         content_tag(:div, "Date Content"),
         content_tag(:div) do

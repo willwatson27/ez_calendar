@@ -11,8 +11,8 @@ defmodule EZCalendar.HTMLTest do
   end
  
   test "builds a calendar for a given html module" do
-    calendar = build_calendar(EZCalendar.MonthCalendar)
-    html = HTML.calendar(EZCalendar.HTML.MonthCalendar, calendar, fn(_)-> " " end)
+    calendar = build_calendar(EZCalendar.BiweeklyCalendar)
+    html = HTML.render_calendar(EZCalendar.HTML.MonthCalendar, calendar, fn(_)-> " " end)
 
     {result, _} = html
     assert result == :safe
@@ -20,7 +20,7 @@ defmodule EZCalendar.HTMLTest do
  
   test "builds html for a month calendar" do
     calendar = build_calendar(EZCalendar.MonthCalendar)
-    html = HTML.month_calendar(calendar, fn(_)-> " " end)
+    html = HTML.render_calendar(calendar, fn(_)-> " " end)
 
     {result, _} = html
     assert result == :safe
@@ -28,7 +28,7 @@ defmodule EZCalendar.HTMLTest do
  
   test "builds html for a week calendar" do
     calendar = build_calendar(EZCalendar.WeekCalendar)
-    html = HTML.week_calendar(calendar, fn(_)-> " " end)
+    html = HTML.render_calendar(calendar, fn(_)-> " " end)
 
     {result, _} = html
     assert result == :safe
@@ -36,7 +36,7 @@ defmodule EZCalendar.HTMLTest do
  
   test "builds html for a day calendar" do
     calendar = build_calendar(EZCalendar.DayCalendar)
-    html = HTML.day_calendar(calendar, fn(_)-> " " end)
+    html = HTML.render_calendar(calendar, fn(_)-> " " end)
 
     {result, _} = html
     assert result == :safe
@@ -44,7 +44,7 @@ defmodule EZCalendar.HTMLTest do
  
   test "builds html for a biweekly calendar" do
     calendar = build_calendar(EZCalendar.BiweeklyCalendar)
-    html = HTML.biweekly_calendar(calendar, fn(_)-> " " end)
+    html = HTML.render_calendar(calendar, fn(_)-> " " end)
 
     {result, _} = html
     assert result == :safe

@@ -8,6 +8,8 @@ defmodule EZCalendar.WeekCalendar do
   alias EZCalendar.WeekCalendar
   defstruct [:title, :dates, :next, :prev, :params]
 
+  def html_module, do:  EZCalendar.HTML.WeekCalendar
+
   def date_range(date, _opts) do
     week_range(date)
   end

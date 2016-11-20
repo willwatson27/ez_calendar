@@ -8,6 +8,8 @@ defmodule EZCalendar.DayCalendar do
   alias EZCalendar.DayCalendar
   defstruct [:title, :dates, :next, :prev, :params, :weekday]
 
+  def html_module, do: EZCalendar.HTML.DayCalendar
+
   def date_range date, _opts do
     date = date |> Date.from_erl!
     {date, date} 

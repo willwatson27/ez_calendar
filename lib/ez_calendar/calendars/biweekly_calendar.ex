@@ -7,6 +7,8 @@ defmodule EZCalendar.BiweeklyCalendar do
   alias EZCalendar.BiweeklyCalendar
   defstruct [:title, :dates, :next, :prev, :params]
 
+  def html_module, do: EZCalendar.HTML.BiweeklyCalendar
+
   def date_range date, opts do
     biweekly_start =  get_biweekly_start(opts)
 

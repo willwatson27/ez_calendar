@@ -19,7 +19,7 @@ defmodule EZCalendar.HTML do
       <%= @calendar.title %>
       <%= calendar_next @calendar, "/shifts/:year/:month" %>
 
-      <%= month_calendar @calendar, fn(date)-> %>
+      <%= render_calendar @calendar, fn(date)-> %>
         <!-- calendar date -->
         <%= for shift <- date.data do %>
           <!-- query results for date -->
@@ -34,39 +34,50 @@ defmodule EZCalendar.HTML do
     end
   end
 
-  alias EZCalendar.HTML.{MonthCalendar, WeekCalendar, DayCalendar, BiweeklyCalendar}
 
   @doc """
   Renders a calendar struct for a given module. 
 
-  Takes a HTML calendar module, a calendar struct and a function as arguments.
-  The provided function will be called with each calendar date to render its contents
+  Useful for using an HTML module that isn't the calendars default.
 
-      <%= calendar EZCalendar.MonthCalendar, @calendar, fn(date)-> %>
+  Takes a HTML calendar module, a calendar struct and a function as arguments.
+  The provided function will be called with each calendar date to render its contents.
+
+      <%= render_calendar MyApp.CustomMonthCalendar, @calendar, fn(date)-> %>
         <!-- calendar date -->
         <%= for shift <- date.data do %>
           <!-- query results for date -->
         <% end %>
       <% end %>
   """
-  def calendar(html_module, calendar_struct, render_func) do
+  def render_calendar(html_module, calendar_struct, render_func) do
     html_module.build(calendar_struct, render_func)
   end
-  
-  @doc "Calls `calendar/3` with `EZCalendar.HTML.MonthCalendar` as the first argument"
-  def month_calendar(calendar_struct, render_func), 
-    do: calendar(MonthCalendar, calendar_struct, render_func)
-  
-  @doc "Calls `calendar/3` with `EZCalendar.HTML.WeekCalendar` as the first argument"
-  def week_calendar(calendar_struct, render_func), 
-    do: calendar(WeekCalendar, calendar_struct, render_func)
-  
-  @doc "Calls `calendar/3` with `EZCalendar.HTML.DayCalendar` as the first argument"
-  def day_calendar(calendar_struct, render_func), 
-    do: calendar(DayCalendar, calendar_struct, render_func)
-  
-  @doc "Calls `calendar/3` with `EZCalendar.HTML.BiweeklyCalendar` as the first argument"
-  def biweekly_calendar(calendar_struct, render_func), 
-    do: calendar(BiweeklyCalendar, calendar_struct, render_func)
+
+
+  @doc """
+  Renders a calendar, the HTML module used will be inferred from the calendar type.
+
+  Takes a calendar struct and a function as arguments. 
+  The provided function will be called with each calendar date to render its contents.
+
+      <%= render_calendar @calendar, fn(date)-> %>
+        <!-- calendar date -->
+        <%= for shift <- date.data do %>
+          <!-- query results for date -->
+        <% end %>
+      <% end %>
+  """
+  def render_calendar(calendar_struct, render_func) do
+    calendar_struct 
+    |> get_html_module
+    |> render_calendar(calendar_struct, render_func)
+  end
+
+  defp get_html_module calendar_struct do
+    calendar_struct 
+    |> Map.get(:__struct__) 
+    |> apply(:html_module, [])    
+  end
 
 end

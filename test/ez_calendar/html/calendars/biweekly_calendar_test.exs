@@ -1,15 +1,14 @@
 defmodule EZCalendar.HTML.BiweeklyCalendarTest do
   use ExUnit.Case, async: true
-  alias EZCalendar.HTML.BiweeklyCalendar
+  alias EZCalendar.Fixtures.{BiweeklyCalendar, Helpers}
 
   setup do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(EZCalendar.Repo)
   end
  
   test "renders a biweekly calendar" do
-    html = EZCalendar.Fixtures.BiweeklyCalendar.calendar
-    |> EZCalendar.FixtureHelpers.calendar_html(BiweeklyCalendar)
+    html = Helpers.calendar_html(BiweeklyCalendar)
 
-    assert html == EZCalendar.Fixtures.BiweeklyCalendar.html
+    assert html == BiweeklyCalendar.html
   end
 end

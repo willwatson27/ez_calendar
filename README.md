@@ -73,7 +73,7 @@ Date or DateTime types are valid, if using a range the types must match.
 
 The timezone defaults to `UTC` and must a be valid TZ data format. It's used to appropriately set each dates `today?` boolean flag. 
 
-The `biweekly_start` must be an erl equal to the first day in any of two week periods you want the calendar to represent. 
+The `biweekly_start` must be an erl equal to the first day in any of the two week periods you want the calendar to represent. 
 Can start on any day of the week. 
 ## Multiple Queries
 You can use a keyword list for the query. Each query will use the default field(s) unless provided in the query list or in the options.
@@ -117,7 +117,7 @@ $ mix ez_calendar.scss
 $ mix ez_calendar.sass
 ```
 
-Build a calendar from the params
+Build a calendar from the params.
 ```elixir
 def index(conn, params) do
   case MyApp.Repo.month_calendar(MyApp.Shift, params) do
@@ -134,7 +134,7 @@ def index(conn, params) do
 end
 ```
 
-Import view helpers
+Import the view helpers.
 ```elixir
 defmodule MyApp.ShiftView do
   use MyApp.Web, :view
@@ -142,23 +142,23 @@ defmodule MyApp.ShiftView do
 end
 ```
 
-Build a calendar using the view helpers
+Render the calendar with the view helpers.
 ```eex
 <%= calendar_prev @calendar, "/shifts/:year/:month" %>
 <%= @calendar.title %>
 <%= calendar_next @calendar, "/shifts/:year/:month" %>
 
-<%= month_calendar @calendar, fn(date)-> %>
+<%= render_calendar @calendar, fn(date)-> %>
   <!-- calendar date -->
   <%= for shift <- date.data do %>
     <!-- query results for date -->
   <% end %> 
 <% end %> 
 ```
-Like the repo functions, there are render functions for each of the built in calendars, 
-you can also use the `calendar/3` function to pass in the HTML module as an arugument.
+If you want to use an html module that is not the default for that calendar,
+you can also use the `render_calendar/3` function to pass in the module as the first arugument.
 ```eex
-<%= calendar MyApp.PayrollCalendar.HTML, @calendar, fn(date)-> %>
+<%= render_calendar MyApp.MonthCalendarHTML, @calendar, fn(date)-> %>
 <% end %>
 # Custom HTML modules can be defined.
 # Examples  lib/ez_calendar/html/calendars/
