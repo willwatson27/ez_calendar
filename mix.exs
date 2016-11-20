@@ -4,7 +4,7 @@ defmodule EZCalendar.Mixfile do
   def project do
     [
       app: :ez_calendar,
-      version: "0.1.5",
+      version: "0.1.6",
       elixir: "~> 1.3",
       elixirc_paths: path(Mix.env),
       build_embedded: Mix.env == :prod,
@@ -20,8 +20,7 @@ defmodule EZCalendar.Mixfile do
       source_url: "https://github.com/willwatson27/ez_calendar",
       homepage_url: "https://github.com/willwatson27/ez_calendar",
       docs: [
-        main: "readme", # The main page in the docs
-        # logo: "path/to/logo.png",
+        main: "readme",
         extras: ["README.md"]
       ],
       
